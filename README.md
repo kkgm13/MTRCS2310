@@ -1,5 +1,4 @@
 # MTRCS2310
-# Authors 
-Sayyid Rasool
-Kelvin Minguell
-Mohammad Ali Sayed Ackbar
+## CS2310 Data Structures and Algorithms with Java Coursework
+Team Group CompSci's
+
