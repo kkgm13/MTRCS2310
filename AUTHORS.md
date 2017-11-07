@@ -1,4 +1,4 @@
 # Authors 
 - Sayyid Rasool
 - Kelvin Minguell
-- Mohammad Ali Sayed Ackbar
+- Mohammad ali Sayed Ackbar
