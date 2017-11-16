@@ -30,3 +30,9 @@ in the read file- ignor the 1st name as it is the line name.
 															Then will compare each station name stored to each station name in the files and when a match comes up it will output 
 															the 1st name of said line. 
 4: Find a path between two stations-						http://archive.oreilly.com/oreillyschool/courses/data-structures-algorithms/graphDataStructures.html
+
+
+2mor in lab - discuss
+
+1- break up - 1st option we break it down -  	look at a selection of data strutures with the help of silvia/assistant - learn to understand how they work and see which one/s would fit best to the option. 
+												Do that for the rest.
