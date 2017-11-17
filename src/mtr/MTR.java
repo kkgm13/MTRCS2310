@@ -1,7 +1,10 @@
 package mtr;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MTR {
@@ -17,20 +20,26 @@ public class MTR {
 	
 	private static void fileInfo() {
 		String fileName = "MTRsystem_partial.csv";
-		File file = new File(fileName);
-		try {
-			Scanner inputStream = new Scanner(file);
-			inputStream.useDelimiter(",");
-			while (inputStream.hasNext()) {
-				String data =inputStream.next();
-			//	String[] values = data.split(",");
-				System.out.println(data);
-			}
-			inputStream.close();
-		}catch(FileNotFoundException e) {
-			
-			e.printStackTrace();
-		}
-	}
+		String line = "";
+		String cvsSplitby = ",";
+	
+        String cvsSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] stations = line.split(cvsSplitBy);
+
+                System.out.println("Line: " + stations[0]);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 	
 }
