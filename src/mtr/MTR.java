@@ -14,8 +14,8 @@ public class MTR {
 	
 	
 	public static void main(String[] args) {
-		fileInfo();
-		//ui = new TUI(controller);
+		//fileInfo();
+		ui = new TUI(controller);
 	}
 	
 	private static void fileInfo() {

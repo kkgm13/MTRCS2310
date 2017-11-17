@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class TUI {
 
-	private Controller controller;  
+	private Controller controller; 
 	private Scanner stdIn;
 	
 	public TUI(Controller controller) {
@@ -73,7 +73,7 @@ public class TUI {
 		}
 	}
 	
-	/*
+	/**
 	 * Returns a string representation of a brief title for this application as the header.
 	 * @return	a header
 	 */
@@ -81,7 +81,7 @@ public class TUI {
 		return "\nMTR Information Centre\n";
 	}
 	
-	/*
+	/**
 	 * Returns a string representation of the user menu.
 	 * @return	the user menu
 	 */
@@ -94,7 +94,7 @@ public class TUI {
 			   "5: Exit this application\n";
 	}
 	
-	/*
+	/**
 	 * Displays the specified info for the user to view.
 	 * @param info	info to be displayed on the screen
 	 */
@@ -102,7 +102,7 @@ public class TUI {
 		System.out.println(info);
 	}
 	
-    /*
+    /**
      * Returns an error message for an unrecognised command.
      * 
      * @param error the unrecognised command
