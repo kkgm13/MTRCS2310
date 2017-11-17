@@ -32,7 +32,7 @@ public class MTR {
                 // use comma as separator
                 String[] stations = line.split(cvsSplitBy);
 
-                System.out.println("Line: " + stations[0]);
+                System.out.println("Line: " + stations[0] + "- First termini: " + stations[1] + "-last termini " + stations[5] );
 
             }
 
