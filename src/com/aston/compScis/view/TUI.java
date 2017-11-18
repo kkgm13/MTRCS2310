@@ -1,9 +1,11 @@
 /**
  * 
  */
-package mtr;
+package com.aston.compScis.view;
 
 import java.util.Scanner;
+
+import com.aston.compScis.Controller.Controller;
 
 /**
  * A simple text-based user interface for showing various information about an MTR network.
@@ -12,12 +14,12 @@ import java.util.Scanner;
  * @version 15/10/2017
  */
 public class TUI {
-	private MTR mtr;
+	private Controller controller;
 	private Scanner stdIn;
 	
 	public TUI(Controller controller) {
 	
-		mtr = new MTR();
+		this.controller = controller;
 		// Creates a Scanner object for obtaining user input
 		stdIn = new Scanner(System.in);
 		
@@ -42,17 +44,17 @@ public class TUI {
 		String command = stdIn.nextLine().trim();
 		switch (command) {
 		case "1" : // Lists all terminus
-			display(mtr.listAllTermini());
+			display(controller.listAllTermini());
 			break;
 		case "2" : // Lists all stations in a line
 			display("Lists all stations in a line...");
 			display("Enter the name of the line you'd like to view:");
-			display(mtr.listStationsInLine(stdIn.nextLine().trim()));
+			display(controller.listStationsInLine(stdIn.nextLine().trim()));
 			break;
 		case "3" : // Lists all connected lines
 			display("Lists all directly connected lines...");
 			display("Enter the name of the required line:");
-			display(mtr.listAllDirectlyConnectedLines(stdIn.nextLine().trim()));
+			display(controller.listAllDirectlyConnectedLines(stdIn.nextLine().trim()));
 			break;
 		case "4" : // Finds a path between two stations
 			display("Finds a path between two stations...");
@@ -60,7 +62,7 @@ public class TUI {
 			String stationA = stdIn.nextLine().trim();
 			display("Enter the name of the end station:");
 			String stationB = stdIn.nextLine().trim();
-			display(mtr.showPathBetween(stationA, stationB));
+			display(controller.showPathBetween(stationA, stationB));
 			break;
 		case "5" : // Exits the application
 			display("Goodbye!");

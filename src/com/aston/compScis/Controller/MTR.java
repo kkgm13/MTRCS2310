@@ -1,4 +1,4 @@
-package mtr;
+package com.aston.compScis.Controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.aston.compScis.model.MTRLine;
+import com.aston.compScis.view.TUI;
 
 public class MTR implements Controller {
 
@@ -15,7 +18,7 @@ public class MTR implements Controller {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		//fileInfo();
+		fileInfo();
 		ui = new TUI(controller);
 
 	}

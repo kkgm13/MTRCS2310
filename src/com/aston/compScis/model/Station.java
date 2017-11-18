@@ -1,4 +1,4 @@
-package mtr;
+package com.aston.compScis.model;
 
 import java.util.HashMap;
 
