@@ -12,14 +12,12 @@ import java.util.Scanner;
  * @version 15/10/2017
  */
 public class TUI {
-
-	private Controller controller; 
+	private MTR mtr;
 	private Scanner stdIn;
 	
 	public TUI(Controller controller) {
-		
-		this.controller = controller;
-		
+	
+		mtr = new MTR();
 		// Creates a Scanner object for obtaining user input
 		stdIn = new Scanner(System.in);
 		
@@ -44,17 +42,17 @@ public class TUI {
 		String command = stdIn.nextLine().trim();
 		switch (command) {
 		case "1" : // Lists all terminus
-			display(controller.listAllTermini());
+			display(mtr.listAllTermini());
 			break;
 		case "2" : // Lists all stations in a line
 			display("Lists all stations in a line...");
 			display("Enter the name of the line you'd like to view:");
-			display(controller.listStationsInLine(stdIn.nextLine().trim()));
+			display(mtr.listStationsInLine(stdIn.nextLine().trim()));
 			break;
 		case "3" : // Lists all connected lines
 			display("Lists all directly connected lines...");
 			display("Enter the name of the required line:");
-			display(controller.listAllDirectlyConnectedLines(stdIn.nextLine().trim()));
+			display(mtr.listAllDirectlyConnectedLines(stdIn.nextLine().trim()));
 			break;
 		case "4" : // Finds a path between two stations
 			display("Finds a path between two stations...");
@@ -62,7 +60,7 @@ public class TUI {
 			String stationA = stdIn.nextLine().trim();
 			display("Enter the name of the end station:");
 			String stationB = stdIn.nextLine().trim();
-			display(controller.showPathBetween(stationA, stationB));
+			display(mtr.showPathBetween(stationA, stationB));
 			break;
 		case "5" : // Exits the application
 			display("Goodbye!");
