@@ -1,4 +1,4 @@
-package com.aston.compScis.view;
+package com.aston.compScis.model;
 
 public class LinearNode<T> {
 		//Get Next Node

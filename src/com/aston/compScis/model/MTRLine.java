@@ -1,5 +1,4 @@
 package com.aston.compScis.model;
-import com.aston.compScis.view.LinearNode;
 
 /**
  * 
