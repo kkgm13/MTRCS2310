@@ -24,13 +24,15 @@ import com.aston.compScis.view.TUI;
  *
  */
 public class MTR implements Controller {
+	
+	private ReadFile file =  new ReadFile();
 
 @Override
 public String listAllTermini() {
 	// TODO Auto-generated method stub
 	
-	String termini="hello" ;
-	return termini;
+
+	return file.getFirstAndLastTermini();
 	
 }
 
