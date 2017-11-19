@@ -3,7 +3,9 @@ package com.aston.compScis.model;
 import java.util.HashMap;
 
 /**
- * The Line Model
+ * <h1>The Line Model</h1>
+ * <br>
+ * This represents a model of what a MTR line.
  * 
  * @author Team CompSci's
  * @version 1.0

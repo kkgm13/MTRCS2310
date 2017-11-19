@@ -1,5 +1,15 @@
 package com.aston.compScis.model;
 
+/**
+ * <h1>LinearNode</h1>
+ * <br>
+ * This data structure is represented in the LinearNode to get a generic type, based on what is referenced.
+ * 
+ * @author Team CompSci's
+ * @version 1.0
+ *
+ * @param <T> Generic
+ */
 public class LinearNode<T> {
 		//Get Next Node
 	private LinearNode<T> next;

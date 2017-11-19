@@ -5,7 +5,7 @@ package com.aston.compScis.view;
 
 import java.util.Scanner;
 
-import com.aston.compScis.Controller.Controller;
+import com.aston.compScis.controller.Controller;
 
 /**
  * A simple text-based user interface for showing various information about an MTR network.

@@ -3,7 +3,9 @@ package com.aston.compScis.model;
 import java.util.HashMap;
 
 /**
- * The Station Model
+ * <h1>The Station Model</h1>
+ * <br>
+ * This represents a model of what a MTR station.
  * 
  * @author Team CompSci's
  * @version 1.0

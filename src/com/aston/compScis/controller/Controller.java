@@ -1,4 +1,4 @@
-package com.aston.compScis.Controller;
+package com.aston.compScis.controller;
 
 /**
  * A controller for the MTR Information Centre system.
