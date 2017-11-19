@@ -42,36 +42,46 @@ public class ReadFile {
 //	}
 	
 	public String getFirstAndLastTermini() {
-	String fileName = "MTRsystem_partial.csv";
-	String line = "";
-	String cvsSplitby = ",";
-    String result = "";
-
-    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-
-        while ((line = br.readLine()) != null) {
-
-            // use comma as separator
-            String[] stations = line.split(cvsSplitby);
-
-            // Result presentation 1
-            /*
-             * result += ("Train Line: " + stations[0] + "\n");
-             * result += ("\tFirst termini:\t " + stations[1] + "\n");
-             * result += ("\tLast termini:\t " + stations[stations.length-1] + "\n\n");
-             */
-            
-            //Result presentation 2
-            result += ("Train Line: " + stations[0] + "\n");
-            result += ("\tThis train goes from:\t " + stations[1] + " --- " + stations[stations.length-1] + "\n\n");
-            
-        }
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-	return result;
+		
+		String line = getLine();
+		
+		return line;
+	
 	
 }
+	
+	private String getLine() {
+		
+		String fileName = "MTRsystem_partial.csv";
+		String line = "";
+		String cvsSplitby = ",";
+	    String result = "";
+
+	    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
+	        while ((line = br.readLine()) != null) {
+
+	            // use comma as separator
+	            String[] stations = line.split(cvsSplitby);
+
+	            // Result presentation 1
+	            /*
+	             * result += ("Train Line: " + stations[0] + "\n");
+	             * result += ("\tFirst termini:\t " + stations[1] + "\n");
+	             * result += ("\tLast termini:\t " + stations[stations.length-1] + "\n\n");
+	             */
+	            
+	            //Result presentation 2
+	            result += ("Train Line: " + stations[0] + "\n");
+	            result += ("\tThis train goes from:\t " + stations[1] + " --- " + stations[stations.length-1] + "\n\n");
+	            
+	        }
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		return result;
+		
+	}
 		
 }
