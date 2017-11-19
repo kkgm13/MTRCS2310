@@ -1,4 +1,4 @@
-package com.aston.compScis.controller;
+package com.aston.compScis.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
