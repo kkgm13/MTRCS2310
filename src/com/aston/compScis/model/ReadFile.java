@@ -54,8 +54,17 @@ public class ReadFile {
             // use comma as separator
             String[] stations = line.split(cvsSplitby);
 
-            result += ("line: " + stations[0] + " " + "first termini: " + stations[1] + " "+  "last termini: " +  " " + stations[stations.length-1]);
-
+            // Result presentation 1
+            /*
+             * result += ("Train Line: " + stations[0] + "\n");
+             * result += ("\tFirst termini:\t " + stations[1] + "\n");
+             * result += ("\tLast termini:\t " + stations[stations.length-1] + "\n\n");
+             */
+            
+            //Result presentation 2
+            result += ("Train Line: " + stations[0] + "\n");
+            result += ("\tThis train goes from:\t " + stations[1] + " --- " + stations[stations.length-1] + "\n\n");
+            
         }
 
     } catch (IOException e) {
