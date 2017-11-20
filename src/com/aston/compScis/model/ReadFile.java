@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 public class ReadFile {
 
 	HashMap<String, ArrayList<String>> mtrData = new HashMap<>();
-	ArrayList<String> mtrStations = new ArrayList<String>();
 	ArrayList<String> list;
 
 	/**
@@ -36,29 +35,45 @@ public class ReadFile {
 		String results = "";
 		// Get the Data Information
 		getLine();
+		//Iterate over the HashMap information
 		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
+		//while the HashMap has next information
 		while (it.hasNext()) {
+			//
 			Entry<String, ArrayList<String>> pair = it.next();
+			//Append the results to output the Train Line name
 			results += ("Train Line: " + pair.getKey() + "\n");
+			//Append the results to output the terminus of the train line
 			results += ("This train goes from:\t " + pair.getValue().get(0) + " --- " + pair.getValue().get(pair.getValue().size() - 1) + "\n\n");
+			//Pop it out from the iteration
 			it.remove();
 		}
+		//Pass to the UI
 		return results;
 	}
 	
-	//Get the Line's Station List
+	/**
+	 * List all the list
+	 * @param line Name of the Intended Train Line
+	 * @return The Train and the Stations Associated
+	 */
 	public String listStationsInLine(String line) {
 		String results = "";
 		getLine();
 		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
-		/**
-		 * Change Starting Here
-		 */
 		while (it.hasNext()) {
 			Entry<String, ArrayList<String>> pair = it.next();
-			if (pair.getKey() == line) {
+			if (pair.getKey().toString().equals(line)) {
 				results += ("Train Line: " + pair.getKey() + "\n");
-				results += ("This train goes from:\t " + pair.getValue() + " --- " + "" + "\n\n");
+				results += ("This train goes from:\t ");
+				for(int i = 0; i<pair.getValue().size(); i++) {
+					if(pair.getValue().get(i) == pair.getValue().get(pair.getValue().size() - 1) ) {
+						results += pair.getValue().get(i);
+					} else {
+						results += pair.getValue().get(i) + " --- ";
+					}
+				}
+				results += "\n\n";
 				it.remove();
 			}
 		}
