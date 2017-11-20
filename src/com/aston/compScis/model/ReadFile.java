@@ -35,48 +35,70 @@ public class ReadFile {
 		String results = "";
 		// Get the Data Information
 		getLine();
-		//Iterate over the HashMap information
+		// Iterate over the HashMap information
 		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
-		//while the HashMap has next information
+		// while the HashMap has next information
 		while (it.hasNext()) {
 			//
 			Entry<String, ArrayList<String>> pair = it.next();
-			//Append the results to output the Train Line name
+			// Append the results to output the Train Line name
 			results += ("Train Line: " + pair.getKey() + "\n");
-			//Append the results to output the terminus of the train line
-			results += ("This train goes from:\t " + pair.getValue().get(0) + " --- " + pair.getValue().get(pair.getValue().size() - 1) + "\n\n");
-			//Pop it out from the iteration
+			// Append the results to output the terminus of the train line
+			results += ("This train goes from:\t " + pair.getValue().get(0) + " --- "
+					+ pair.getValue().get(pair.getValue().size() - 1) + "\n\n");
+			// Pop it out from the iteration
 			it.remove();
 		}
-		//Pass to the UI
+		// Pass to the UI
 		return results;
 	}
-	
+
 	/**
-	 * List all the list
+	 * List all the train stations of the train line
+	 * 
 	 * @param line Name of the Intended Train Line
 	 * @return The Train and the Stations Associated
 	 */
 	public String listStationsInLine(String line) {
+		// Result Variable to pass to the UI
 		String results = "";
+		// Get the Data Information
 		getLine();
+		// Iterate over the HashMap information
 		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
+		// while the HashMap has next information
 		while (it.hasNext()) {
+			//Make a new HashMap stating the iteration
 			Entry<String, ArrayList<String>> pair = it.next();
+			//If the HashMap Key is the requested Line
 			if (pair.getKey().toString().equals(line)) {
+				//Present the Train Line Name
 				results += ("Train Line: " + pair.getKey() + "\n");
 				results += ("This train goes from:\t ");
-				for(int i = 0; i<pair.getValue().size(); i++) {
-					if(pair.getValue().get(i) == pair.getValue().get(pair.getValue().size() - 1) ) {
+				//Loop Over the ArrayList in the HashMap
+				for (int i = 0; i < pair.getValue().size(); i++) {
+					//If the current index is the size
+					if (pair.getValue().get(i) == pair.getValue().get(pair.getValue().size() - 1)) {
+						//Present the LAST line station
 						results += pair.getValue().get(i);
 					} else {
+						//Present the Line station
 						results += pair.getValue().get(i) + " --- ";
 					}
 				}
+				//New Line
 				results += "\n\n";
+				//Remove from the iteration
 				it.remove();
-			}
+			} 
+
 		}
+		//If the station isn't known
+		if(results == "") {
+			//Output station isn't known
+			results += "Not a known MTR Station.";
+		}
+		//Pass result to the UI
 		return results;
 	}
 
