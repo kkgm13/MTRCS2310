@@ -5,8 +5,8 @@ Currently a private method in MTR
 	- Prints out CSV file based on "," delimiter
 
 ----------Functional Requirements----------
-1: List all termini in the MTR network
-	1.1: For each MTR Line in the network, list ALL termini
+1: List all terminus in the MTR network
+	1.1: For each MTR Line in the network, list ALL terminus
 		- Method will read from file, ignoring the 1st name and take the 2nd and last name on a line and outputs it as the terminus.
 		Needed Classes:
 			- Station

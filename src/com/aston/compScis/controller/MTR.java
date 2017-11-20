@@ -1,15 +1,6 @@
 package com.aston.compScis.controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
-import com.aston.compScis.model.MTRLine;
 import com.aston.compScis.model.ReadFile;
-import com.aston.compScis.view.TUI;
 
 /**
  * <h1>MTR</h1>
@@ -30,8 +21,6 @@ public class MTR implements Controller {
 @Override
 public String listAllTermini() {
 	// TODO Auto-generated method stub
-	
-
 	return file.getFirstAndLastTermini();
 	
 }
@@ -39,7 +28,7 @@ public String listAllTermini() {
 @Override
 public String listStationsInLine(String line) {
 	// TODO Auto-generated method stub
-	return "hello";
+	return file.listStationsInLine(line);
 }
 
 @Override
