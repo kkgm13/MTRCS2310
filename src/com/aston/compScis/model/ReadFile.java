@@ -32,7 +32,7 @@ public class ReadFile {
 	 */
 	public String getFirstAndLastTermini() {
 		// Result Variable to pass to the UI
-		String results = "";
+		String results = "\n";
 		// Get the Data Information
 		getLine();
 		// Iterate over the HashMap information
@@ -71,9 +71,9 @@ public class ReadFile {
 			//Make a new HashMap stating the iteration
 			Entry<String, ArrayList<String>> pair = it.next();
 			//If the HashMap Key is the requested Line
-			if (pair.getKey().toString().equals(line)) {
+			if (pair.getKey().equalsIgnoreCase(line)) {
 				//Present the Train Line Name
-				results += ("Train Line: " + pair.getKey() + "\n");
+				results += ("\nTrain Line: " + pair.getKey() + "\n");
 				results += ("This train goes from:\t ");
 				//Loop Over the ArrayList in the HashMap
 				for (int i = 0; i < pair.getValue().size(); i++) {
@@ -93,7 +93,7 @@ public class ReadFile {
 			} 
 
 		}
-		//If the station isn't known
+		//If the Lines isn't known
 		if(results == "") {
 			//Output station isn't known
 			results += "Not a known MTR Station.";
