@@ -22,7 +22,7 @@ import java.util.Map.Entry;
  */
 public class ReadFile {
 
-	HashMap<String, ArrayList<String>> mtrData = new HashMap<>();
+	HashMap<String, ArrayList<String>> mtrData;
 	ArrayList<String> list;
 
 	/**
@@ -116,6 +116,7 @@ public class ReadFile {
 		String cvsSplitby = ",";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+			mtrData = new HashMap<>();
 			while ((line = br.readLine()) != null) {
 				// Split the data and store in an Array
 				String[] stations = line.split(cvsSplitby);
