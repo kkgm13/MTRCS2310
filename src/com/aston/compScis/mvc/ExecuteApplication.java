@@ -17,7 +17,7 @@ public class ExecuteApplication {
 	private static TUI tui;
 	private static MTR mtr;
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		mtr = new MTR();
 		tui = new TUI(mtr);
 	}
