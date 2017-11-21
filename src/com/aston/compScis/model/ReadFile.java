@@ -5,9 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * 
@@ -22,94 +19,20 @@ import java.util.Map.Entry;
  */
 public class ReadFile {
 
-	HashMap<String, ArrayList<String>> mtrData;
-	ArrayList<String> list;
-
-	/**
-	 * Get the Train Line Name and the Terminus of the Line
-	 * 
-	 * @return Train line Name and the Terminus of the line
-	 */
-	public String getFirstAndLastTermini() {
-		// Result Variable to pass to the UI
-		String results = "\n";
-		// Get the Data Information
-		getLine();
-		// Iterate over the HashMap information
-		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
-		// while the HashMap has next information
-		while (it.hasNext()) {
-			//
-			Entry<String, ArrayList<String>> pair = it.next();
-			// Append the results to output the Train Line name
-			results += ("Train Line: " + pair.getKey() + "\n");
-			// Append the results to output the terminus of the train line
-			results += ("This train goes from:\t " + pair.getValue().get(0) + " --- "
-					+ pair.getValue().get(pair.getValue().size() - 1) + "\n\n");
-			// Pop it out from the iteration
-			it.remove();
-		}
-		// Pass to the UI
-		return results;
-	}
-
-	/**
-	 * List all the train stations of the train line
-	 * 
-	 * @param line Name of the Intended Train Line
-	 * @return The Train and the Stations Associated
-	 */
-	public String listStationsInLine(String line) {
-		// Result Variable to pass to the UI
-		String results = "";
-		// Get the Data Information
-		getLine();
-		// Iterate over the HashMap information
-		Iterator<Map.Entry<String, ArrayList<String>>> it = mtrData.entrySet().iterator();
-		// while the HashMap has next information
-		while (it.hasNext()) {
-			//Make a new HashMap stating the iteration
-			Entry<String, ArrayList<String>> pair = it.next();
-			//If the HashMap Key is the requested Line
-			if (pair.getKey().equalsIgnoreCase(line)) {
-				//Present the Train Line Name
-				results += ("\nTrain Line: " + pair.getKey() + "\n");
-				results += ("This train goes from:\t ");
-				//Loop Over the ArrayList in the HashMap
-				for (int i = 0; i < pair.getValue().size(); i++) {
-					//If the current index is the size
-					if (pair.getValue().get(i) == pair.getValue().get(pair.getValue().size() - 1)) {
-						//Present the LAST line station
-						results += pair.getValue().get(i);
-					} else {
-						//Present the Line station
-						results += pair.getValue().get(i) + " --- ";
-					}
-				}
-				//New Line
-				results += "\n\n";
-				//Remove from the iteration
-				it.remove();
-			} 
-
-		}
-		//If the Lines isn't known
-		if(results == "") {
-			//Output station isn't known
-			results += "Not a known MTR Station.";
-		}
-		//Pass result to the UI
-		return results;
-	}
-
+	//Hash Map Data Structure to save the Line and Station
+	private HashMap<String, ArrayList<String>> mtrData;
+	// ArrayList Data Structure to store the list of Stations
+	private ArrayList<String> list;
+	// Variable to get the File Name
+	private String fileName = "MTRsystem_partial.csv";
+	
+	
 	/**
 	 * Store the data of the CSV file to the HashMap(String, ArrayList)
 	 * 
 	 * @return Data
 	 */
-	private void getLine() {
-		// Variable to get the File Name
-		String fileName = "MTRsystem_partial.csv";
+	public void getLine() {
 		// Variable to store and split information
 		String line;
 		// Variable to detect the delimiting code
@@ -141,5 +64,22 @@ public class ReadFile {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Get the MTRData
+	 * 
+	 * @return mtrData 
+	 */
+	public HashMap<String, ArrayList<String>> getMtrData() {
+		return mtrData;
+	}
 
+	/**
+	 * Set the MTRData
+	 * 
+	 * @param mtrData
+	 */
+	public void setMtrData(HashMap<String, ArrayList<String>> mtrData) {
+		this.mtrData = mtrData;
+	}
 }
