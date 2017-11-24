@@ -10,7 +10,6 @@ import com.aston.compScis.view.TUI;
  * 
  * @author Team CompSci's
  * @version 1.0
- *
  */
 public class ExecuteApplication {
 

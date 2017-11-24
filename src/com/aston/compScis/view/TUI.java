@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aston.compScis.view;
 
 import java.util.Scanner;
