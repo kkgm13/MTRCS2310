@@ -20,11 +20,9 @@ import java.util.HashMap;
 public class ReadFile {
 
 	//Hash Map Data Structure to save the Line and Station
-	private HashMap<Line, Station> mtrLine;
-	//
-	private Line line;
-	//
-	private Station station;
+	private HashMap<String, ArrayList<String>> mtrData;
+	// ArrayList Data Structure to store the list of Stations
+	private ArrayList<String> list;
 	// Variable to get the File Name
 	private String fileName = "MTRsystem_partial.csv";
 	
@@ -36,29 +34,27 @@ public class ReadFile {
 	 */
 	public void getLine() {
 		// Variable to store and split information
-		String dataline;
+		String line;
 		// Variable to detect the delimiting code
 		String cvsSplitby = ",";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			mtrLine = new HashMap<>();
-			while ((dataline = br.readLine()) != null) {
+			mtrData = new HashMap<>();
+			while ((line = br.readLine()) != null) {
 				// Split the data and store in an Array
-				String[] stations = dataline.split(cvsSplitby);
+				String[] stations = line.split(cvsSplitby);
 				// Store the key based on the first index of the Array
 				String key = stations[0];
 				// Loop on the Array
 				for (int i = 1; i < stations.length; i++) {
 					// Store the Line Name to the key to the List
-					line.setLineName(key);
+					list = mtrData.get(key);
 					// If the list is null
-					if (station == null) {
+					if (list == null) {
 						// Create a new ArrayList
-						station = new List<Station>();
-						//
-						line.setStations(station.getStationName());
+						list = new ArrayList<>();
 						// Add the list to the HashMap with the Key
-						mtrLine.put(line, station);
+						mtrData.put(key, list);
 					}
 					// Add each station to the ArrayList.
 					list.add(new String(stations[i]));
@@ -74,8 +70,8 @@ public class ReadFile {
 	 * 
 	 * @return mtrData 
 	 */
-	public HashMap<Line, Station> getMtrData() {
-		return mtrLine;
+	public HashMap<String, ArrayList<String>> getMtrData() {
+		return mtrData;
 	}
 
 	/**
@@ -83,8 +79,7 @@ public class ReadFile {
 	 * 
 	 * @param mtrData
 	 */
-	public void setMtrLine(HashMap<Line, Station> mtrLine) {
-		this.mtrLine = mtrLine;
+	public void setMtrData(HashMap<String, ArrayList<String>> mtrData) {
+		this.mtrData = mtrData;
 	}
-	
 }
