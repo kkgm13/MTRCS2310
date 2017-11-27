@@ -13,6 +13,10 @@ NOTES:
 	2.1: For a MTR Line, list all the station stops
 		- Method will read the input, check the 1st name of each line
 		- Prints off all names on that line ignoring 1st name.
+		Related Class Included
+			> Line
+			> Station
+			> ReadFile
 		Related Data Structure:
 			* LinkedList
 3: List all lines that are directly connected to a line
@@ -20,12 +24,20 @@ NOTES:
 		eg: Island Line = Tsuen Wan Line, South Island Line, Tseung Kwan O Line
 		- Similar to previous, except stores all the station in that input line instead of showing them.
 		- Compare each station name stored to each station name in the files and when a match comes up it will output the 1st name of said line.
+		Related Class Included
+			> Line
+			> Station
+			> ReadFile
 		Related Data Structure:
 			*  
 4: Find a path between two stations
 	4.1: Find a path between two stations
 		Needed Classes:
 			- http://archive.oreilly.com/oreillyschool/courses/data-structures-algorithms/graphDataStructures.html
+		Related Class Included
+			> Line
+			> Station
+			> ReadFile
 		Related Data Structure
 			* Stack
 
