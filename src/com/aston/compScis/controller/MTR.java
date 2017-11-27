@@ -21,7 +21,7 @@ import com.aston.compScis.model.ReadFile;
  */
 public class MTR implements Controller {
 
-	//Read File Class
+	// Read File Class
 	private ReadFile file = new ReadFile();
 
 	/**
