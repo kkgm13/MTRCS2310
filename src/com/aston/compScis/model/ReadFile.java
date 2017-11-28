@@ -3,13 +3,13 @@ package com.aston.compScis.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * 
- * <h1>ReadFile</h1> <br>
+ * <h1>ReadFile</h1>
+ * <hr>
  * 
  * This allows to present the CSV file's information. This would come from the
  * MTRsystem_partial.csv file.

@@ -1,14 +1,11 @@
 package com.aston.compScis.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aston.compScis.model.Line;
-import com.aston.compScis.model.ReadFile;
 import com.aston.compScis.model.Station;
 
 /**
@@ -26,11 +23,11 @@ public class MTR implements Controller {
 	// Read File Class
 	//private ReadFile file = new ReadFile();
 	// Station Class
-	private Station station = new Station();
+//	private Station station = new Station();
 	// Line Class
 	private Line currentLine = new Line();
 	// HashMap
-	private HashMap<Line, List<Station>> mtrLines;
+//	private HashMap<Line, List<Station>> mtrLines;
 	
 	/**
 	 * Get the Train Line Name and the Terminus of the Line
