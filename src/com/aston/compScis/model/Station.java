@@ -4,10 +4,6 @@ public class Station {
 
 	private String stationName;
 
-	public Station() {
-
-	}
-
 	public String getStationName() {
 		return stationName;
 	}

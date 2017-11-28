@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 
@@ -18,13 +19,14 @@ import java.util.HashMap;
  *
  */
 public class ReadFile {
-
 	//Hash Map Data Structure to save the Line and Station
-	private HashMap<String, ArrayList<String>> mtrData;
-	// ArrayList Data Structure to store the list of Stations
-	private ArrayList<String> list;
+	private HashMap<Line, List<Station>> mtrLine;
 	// Variable to get the File Name
 	private String fileName = "MTRsystem_partial.csv";
+	//Line Class
+	private Line line;
+	//Station Class
+	private Station station;
 	
 	
 	/**
@@ -34,44 +36,45 @@ public class ReadFile {
 	 */
 	public void getLine() {
 		// Variable to store and split information
-		String line;
+		String dataLine;
 		// Variable to detect the delimiting code
 		String cvsSplitby = ",";
-
+		
+		//Grab the CSV data
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			mtrData = new HashMap<>();
-			while ((line = br.readLine()) != null) {
+			//Create a new HashMap
+			mtrLine = new HashMap<>();
+			//While the data is being grabbed
+			while ((dataLine = br.readLine()) != null) {
 				// Split the data and store in an Array
-				String[] stations = line.split(cvsSplitby);
+				String[] listOfStations = dataLine.split(cvsSplitby);
+				//Create empty line
+				line = new Line();
 				// Store the key based on the first index of the Array
-				String key = stations[0];
-				// Loop on the Array
-				for (int i = 1; i < stations.length; i++) {
-					// Store the Line Name to the key to the List
-					list = mtrData.get(key);
-					// If the list is null
-					if (list == null) {
-						// Create a new ArrayList
-						list = new ArrayList<>();
-						// Add the list to the HashMap with the Key
-						mtrData.put(key, list);
-					}
-					// Add each station to the ArrayList.
-					list.add(new String(stations[i]));
+				line.setLineName(listOfStations[0]);
+				// Loop on the Array CSV line
+				for (int i = 1; i < listOfStations.length; i++) {
+					//Create a new Station
+					station = new Station();
+					//Set the new Station
+					station.setStationName(listOfStations[i]);
+					//Add the station to the List of Stations
+					line.getStations().add(station);
 				}
+				//Place it into the HashMap
+				mtrLine.put(line, line.getStations());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	/**
 	 * Get the MTRData
 	 * 
 	 * @return mtrData 
 	 */
-	public HashMap<String, ArrayList<String>> getMtrData() {
-		return mtrData;
+	public HashMap<Line, List<Station>> getMtrLine() {
+		return mtrLine;
 	}
 
 	/**
@@ -79,7 +82,7 @@ public class ReadFile {
 	 * 
 	 * @param mtrData
 	 */
-	public void setMtrData(HashMap<String, ArrayList<String>> mtrData) {
-		this.mtrData = mtrData;
+	public void setMtrLine(HashMap<Line, List<Station>> mtrLine) {
+		this.mtrLine = mtrLine;
 	}
 }
