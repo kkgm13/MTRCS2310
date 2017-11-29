@@ -129,6 +129,7 @@ public class MTR implements Controller {
 			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
 				// Set the Name of the Line
 				searchedLine.setLineName(pair.getKey().getLineName());
+				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
 				// Loop through the HashMap Station Values
 				for (int i = 0; i < pair.getValue().size(); i++) {
 					// Add to the ArrayList
@@ -165,7 +166,7 @@ public class MTR implements Controller {
 								break;
 							} else {
 								// Input the Information of the line
-								results += pair.getKey().getLineName() + "\n";
+								results += "- " + pair.getKey().getLineName() + "\n\t";
 								//Line that has been inserted is known
 								hasLine = true;
 
