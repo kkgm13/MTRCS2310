@@ -111,9 +111,9 @@ public class MTR implements Controller {
 		// Get the Data Information
 		currentLine.getMTRData();
 		// Iterate over the HashMap information
-			//To get the intended line
+		// To get the intended line
 		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
-			//To get the matching Stations
+		// To get the matching Stations
 		Iterator<Map.Entry<Line, List<Station>>> it2 = currentLine.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
 		Line searchedLine = new Line();
@@ -129,48 +129,60 @@ public class MTR implements Controller {
 			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
 				// Set the Name of the Line
 				searchedLine.setLineName(pair.getKey().getLineName());
-				//Loop through the HashMap Station Values
+				// Loop through the HashMap Station Values
 				for (int i = 0; i < pair.getValue().size(); i++) {
-					//Add to the ArrayList
+					// Add to the ArrayList
 					searchedLineStations.add(pair.getValue().get(i));
 				}
-				//Add list to the stations
+				// Add list to the stations
 				searchedLine.setStations(searchedLineStations);
 			}
 		}
 
-		
 		/*
-		 * Compare the Line's station against 
+		 * Compare the Line's station against
 		 */
-		while(it.hasNext()) {
+		// True/False if the line has been written
+		boolean hasLine;
+		//Loop while second local file 
+		while (it.hasNext()) {
 			// Make a new HashMap stating the iteration
 			Entry<Line, List<Station>> pair = it.next();
-			//Loop over Local HashMap
-			for(int j = 0; j < pair.getValue().size(); j++) {
-				//Loop over Line Object
-				for(int i = 0; i < searchedLine.getStations().size(); i++) {
-					//If a station from the local HashMap (pair) contains a station from the Line Object (searchedLine)  
-					if(searchedLine.getStations().get(i).getStationName().contains(pair.getValue().get(j).getStationName())) {
-						//If the stations are the same
-						if(searchedLine.getLineName().equalsIgnoreCase(pair.getKey().getLineName())) {
-							//do nothing
-							break;
-						} else {
-							//Input the Information of the line
-							results += pair.getKey().getLineName() + "\n";
+			//set to false
+			hasLine = false;
+			// Loop over Local HashMap
+			for (int j = 0; j < pair.getValue().size(); j++) {
+				// Loop over Line Object
+				for (int i = 0; i < searchedLine.getStations().size(); i++) {
+					// If a station from the local HashMap (pair) contains a station from the Line
+					// Object (searchedLine)
+					if (searchedLine.getStations().get(i).getStationName()
+							.contains(pair.getValue().get(j).getStationName())) {
+						// If the stations are the same
+						while (!hasLine) {
+							if (searchedLine.getLineName().equalsIgnoreCase(pair.getKey().getLineName())) {
+								// do nothing
+								break;
+							} else {
+								// Input the Information of the line
+								results += pair.getKey().getLineName() + "\n";
+								//Line that has been inserted is known
+								hasLine = true;
+
+							}
 						}
 					}
 				}
 			}
+			hasLine = false;
 		}
-		
+
 		// If the Lines isn't known
 		if (results == "") {
 			// Output station isn't known
 			results += "Not a known MTR Station or no known lines found.";
 		}
-		//Present to the user
+		// Present to the user
 		return results;
 	}
 
