@@ -119,6 +119,13 @@ public class MTR implements Controller {
 		Line searchedLine = new Line();
 		// Station created
 		List<Station> searchedLineStations = new ArrayList<>();
+		
+		currentLine.getMTRLines().entrySet().stream()
+				.map(e -> e.getKey())
+				.map(Line::getLineName)
+				.filter(line::equalsIgnoreCase)
+				.map(Object::toString)
+				.reduce(new StringBuilder(), StringBuilder::append);
 		/*
 		 * Search for the line
 		 */
