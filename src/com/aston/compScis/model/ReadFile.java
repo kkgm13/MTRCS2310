@@ -3,6 +3,7 @@ package com.aston.compScis.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,70 +20,144 @@ import java.util.List;
  *
  */
 public class ReadFile {
-	//Hash Map Data Structure to save the Line and Station
+	// Hash Map Data Structure to save the Line and Station
 	private HashMap<Line, List<Station>> mtrLine;
+	// Hash Map Data Structure to save the Station and Line
+	private HashMap<Station, List<Line>> mtrStation;
 	// Variable to get the File Name
 	private String fileName = "MTRsystem_partial.csv";
-	//Line Class
+	// Line Class
 	private Line line;
-	//Station Class
+	// Station Class
 	private Station station;
-	
-	
+
 	/**
-	 * Store the data of the CSV file to the HashMap(String, ArrayList)
+	 * Store the data of the CSV file to the HashMap(Line, List of Stations)
 	 * 
-	 * @return Data
+	 * @return MTR Data as a HashMap with the Key of Lines
 	 */
 	public void getLine() {
 		// Variable to store and split information
 		String dataLine;
 		// Variable to detect the delimiting code
 		String cvsSplitby = ",";
-		
-		//Grab the CSV data
+
+		// Grab the CSV data
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			//Create a new HashMap
+			// Create a new HashMap
 			mtrLine = new HashMap<>();
-			//While the data is being grabbed
+			// While the data is being grabbed
 			while ((dataLine = br.readLine()) != null) {
 				// Split the data and store in an Array
 				String[] listOfStations = dataLine.split(cvsSplitby);
-				//Create empty line
+				// Create empty line
 				line = new Line();
 				// Store the key based on the first index of the Array
 				line.setLineName(listOfStations[0]);
 				// Loop on the Array CSV line
 				for (int i = 1; i < listOfStations.length; i++) {
-					//Create a new Station
+					// Create a new Station
 					station = new Station();
-					//Set the new Station
+					// Set the new Station
 					station.setStationName(listOfStations[i]);
-					//Add the station to the List of Stations
+					// Add the station to the List of Stations
 					line.getStations().add(station);
 				}
-				//Place it into the HashMap
+				// Place it into the HashMap
 				mtrLine.put(line, line.getStations());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
-	 * Get the MTRData
+	 * Store the data of the CSV file to the HashMap(Station, List of Lines)
 	 * 
-	 * @return mtrData 
+	 * @return MTR Data as a HashMap with the Key of Stations
+	 */
+	public void getStation() {
+		// Variable to store and split information
+		String dataLine;
+		// Variable to detect the delimiting code
+		String cvsSplitby = ",";
+
+		// Grab the CSV data
+		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+			// Create a new HashMap
+			mtrStation = new HashMap<>();
+			//
+			List<Line> relatedLines = new ArrayList<>();
+			// While the data is being grabbed
+			while ((dataLine = br.readLine()) != null) {
+				// Split the data and store in an Array
+				String[] listOfStations = dataLine.split(cvsSplitby);
+				// Create empty line
+				line = new Line();
+				// Store the key based on the first index of the Array
+				line.setLineName(listOfStations[0]);
+				// Loop on the Array CSV line
+				for (int i = 1; i < listOfStations.length; i++) {
+					// Create a new Station
+					station = new Station();
+					// Set the new Station
+					station.setStationName(listOfStations[i]);
+					// Add the station to the List of Stations
+					line.getStations().add(station);
+				}
+				
+				/*
+				 * Compare between the station name and if the line contains that station
+				 * Store the HashMap
+				 */
+				for(int i = 0; i < listOfStations.length; i++) {
+					if(station.getStationName().equals(line.getStations().get(i).toString())) {
+						relatedLines.add(line);
+					}
+				}
+				
+				// Place it into the HashMap
+				mtrStation.put(station,relatedLines);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Get the MTRData with Line
+	 * 
+	 * @return mtrData
 	 */
 	public HashMap<Line, List<Station>> getMtrLine() {
 		return mtrLine;
 	}
 
 	/**
-	 * Set the MTRData
+	 * Set the MTRData with Line
 	 * 
 	 * @param mtrData
 	 */
 	public void setMtrLine(HashMap<Line, List<Station>> mtrLine) {
 		this.mtrLine = mtrLine;
 	}
+
+	/**
+	 * Get the MTRData as Station
+	 * 
+	 * @return mtrData
+	 */
+	public HashMap<Station, List<Line>> getMtrStation() {
+		return mtrStation;
+	}
+
+	/**
+	 * Set the MTRData with Line
+	 * @param mtrStation
+	 */
+	public void setMtrStation(HashMap<Station, List<Line>> mtrStation) {
+		this.mtrStation = mtrStation;
+	}
+	
+	
 }

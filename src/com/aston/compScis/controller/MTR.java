@@ -34,7 +34,7 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "\n";
 		// Get the MTR Line Data
-		currentLine.getMTRData();
+		currentLine.getMTRLineData();
 		// Iterate over the HashMap information
 		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
 		// while the HashMap has next information
@@ -64,10 +64,9 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "";
 		// Get the Data Information
-		currentLine.getMTRData();
+		currentLine.getMTRLineData();
 		// Iterate over the HashMap information
 		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
-		;
 		// while the HashMap has next information
 		while (it.hasNext()) {
 			// Make a new HashMap stating the iteration
@@ -109,7 +108,7 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "";
 		// Get the Data Information
-		currentLine.getMTRData();
+		currentLine.getMTRLineData();
 		// Iterate over the HashMap information
 		// To get the intended line
 		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
@@ -118,14 +117,43 @@ public class MTR implements Controller {
 		// Create the intended Line for User
 		Line searchedLine = new Line();
 		// Station created
-		List<Station> searchedLineStations = new ArrayList<>();
+		List<Station> searchedLineStations;
+		searchedLineStations = new ArrayList<>();
 		
-		currentLine.getMTRLines().entrySet().stream()
-				.map(e -> e.getKey())
-				.map(Line::getLineName)
-				.filter(line::equalsIgnoreCase)
-				.map(Object::toString)
-				.reduce(new StringBuilder(), StringBuilder::append);
+		/*
+		 * Refactoring Infrmation
+		 */
+//		//Create a new String that get and stream the entry set of the
+//		String intendedLine = currentLine.getMTRLines().entrySet().stream()
+//				//Mapping the Key to the intended object
+//				.map(e -> e.getKey())
+//				//Get the Line's name
+//				.map(Line::getLineName)
+//				//Filter against the requestedLine 
+//				.filter(line::equalsIgnoreCase)
+//				//Get the String
+//				.map(s -> s.toString())
+//				// Create a new StringBulder and append the string builder of Lines
+//				.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+//				// As a String variable
+//				.toString();
+//		// Append to the results
+//		results += "The " + intendedLine + " connects with the following lines: \n\t";
+//		// Add the Stations from the current 
+//		searchedLineStations.addAll(currentLine.getStations());
+//		// Add list to the stations
+//		searchedLine.setStations(searchedLineStations);
+//		
+			//Problem Here!
+//		//Get the Stations
+//		searchedLineStations = currentLine.getMTRLines().values().stream()
+//				.map(s -> s.forEach(currentLine.getMTRLines().keySet()))
+//				.filter(currentLine.getMTRLines().::equalsIgnoreCase)
+//				.map(s -> s.toString())
+//				.collect(StringBuilder:: new, StringBuilder::append, StringBuilder::append)
+//				.toString();
+//		searchedLineStations.addAll(currentLine.setStations(searchedLineStations));
+		
 		/*
 		 * Search for the line
 		 */
