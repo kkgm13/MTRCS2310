@@ -18,12 +18,9 @@ public class ExecuteApplication {
 	private static TUI tui;
 	// MTR Controller Class
 	private static MTR mtr;
-	//MTRMetro Class
-	private static MTRMetro metroData;
 
 	public static void main(String[] args){
 		mtr = new MTR();
-		metroData = new MTRMetro();
 		tui = new TUI(mtr);
 	}
 }

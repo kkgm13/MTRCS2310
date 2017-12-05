@@ -24,9 +24,17 @@ import com.aston.compScis.model.Station;
 public class MTR implements Controller {
 
 	// Line Class
-	private Line currentLine = new Line();
-	private MTRMetro metroData = new MTRMetro();
-
+	private MTRMetro metroData;
+	
+	/**
+	 * MTR Constructor
+	 */
+	public MTR() {
+		//Initialise MTRMetro
+		metroData = new MTRMetro();
+		//Grab the Data
+		metroData.getMTRLines();
+	}
 	
 	/**
 	 * Get the Train Line Name and the Terminus of the Line

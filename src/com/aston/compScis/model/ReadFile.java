@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * 
  * <h1>ReadFile</h1>
- * <hr>
  * 
- * This allows to present the CSV file's information. This would come from the
- * MTRsystem_partial.csv file.
+ * <p>This allows to grab the Data from the CSV file.
+ * This would come from the MTRsystem_partial.csv file.
  * 
  * @author Team CompSci's
  * @version 1.0
