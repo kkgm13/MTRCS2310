@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aston.compScis.model.Line;
+import com.aston.compScis.model.MTRMetro;
 import com.aston.compScis.model.Station;
 
 /**
@@ -24,7 +25,9 @@ public class MTR implements Controller {
 
 	// Line Class
 	private Line currentLine = new Line();
+	private MTRMetro metroData = new MTRMetro();
 
+	
 	/**
 	 * Get the Train Line Name and the Terminus of the Line
 	 * 
@@ -33,10 +36,9 @@ public class MTR implements Controller {
 	public String listAllTermini() {
 		// Result Variable to pass to the UI
 		String results = "\n";
-		// Get the MTR Line Data
-		currentLine.getMTRLineData();
+		metroData.getMTRLineData();
 		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
 		// while the HashMap has next information
 		while (it.hasNext()) {
 			// Make a new Entry of HashMaps
@@ -64,9 +66,9 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "";
 		// Get the Data Information
-		currentLine.getMTRLineData();
+		metroData.getMTRLineData();
 		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
 		// while the HashMap has next information
 		while (it.hasNext()) {
 			// Make a new HashMap stating the iteration
@@ -108,12 +110,12 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "";
 		// Get the Data Information
-		currentLine.getMTRLineData();
+		metroData.getMTRLineData();
 		// Iterate over the HashMap information
 		// To get the intended line
-		Iterator<Map.Entry<Line, List<Station>>> it = currentLine.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
 		// To get the matching Stations
-		Iterator<Map.Entry<Line, List<Station>>> it2 = currentLine.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
 		Line searchedLine = new Line();
 		// Station created
