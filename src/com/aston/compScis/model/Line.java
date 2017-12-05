@@ -1,7 +1,6 @@
 package com.aston.compScis.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

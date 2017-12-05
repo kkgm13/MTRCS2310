@@ -14,8 +14,11 @@ import com.aston.compScis.view.TUI;
  */
 public class ExecuteApplication {
 
+	// Textual UI
 	private static TUI tui;
+	// MTR Controller Class
 	private static MTR mtr;
+	//MTRMetro Class
 	private static MTRMetro metroData;
 
 	public static void main(String[] args){

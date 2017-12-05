@@ -123,6 +123,27 @@ public class MTR implements Controller {
 		searchedLineStations = new ArrayList<>();
 		
 		/*
+		 * Search for the line
+		 */
+		while (it2.hasNext()) {
+			// Make a new HashMap stating the iteration
+			Entry<Line, List<Station>> pair = it2.next();
+			// If the searched line is the line in the
+			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
+				// Set the Name of the Line
+				searchedLine.setLineName(pair.getKey().getLineName());
+				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
+				// Loop through the HashMap Station Values
+				for (int i = 0; i < pair.getValue().size(); i++) {
+					// Add to the ArrayList
+					searchedLineStations.add(pair.getValue().get(i));
+				}
+				// Add list to the stations
+				searchedLine.setStations(searchedLineStations);
+			}
+		}
+		
+		/*
 		 * Refactoring Infrmation
 		 */
 //		//Create a new String that get and stream the entry set of the
@@ -155,27 +176,6 @@ public class MTR implements Controller {
 //				.collect(StringBuilder:: new, StringBuilder::append, StringBuilder::append)
 //				.toString();
 //		searchedLineStations.addAll(currentLine.setStations(searchedLineStations));
-		
-		/*
-		 * Search for the line
-		 */
-		while (it2.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it2.next();
-			// If the searched line is the line in the
-			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
-				// Set the Name of the Line
-				searchedLine.setLineName(pair.getKey().getLineName());
-				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
-				// Loop through the HashMap Station Values
-				for (int i = 0; i < pair.getValue().size(); i++) {
-					// Add to the ArrayList
-					searchedLineStations.add(pair.getValue().get(i));
-				}
-				// Add list to the stations
-				searchedLine.setStations(searchedLineStations);
-			}
-		}
 
 		/*
 		 * Compare the Line's station against
