@@ -17,6 +17,35 @@ public class Line {
 	//List of Station Objects
 	private List<Station> stations = new ArrayList<>();
 	
+	private DoubleNode<Station>lastStation;
+	
+	public Line(Station station){
+		
+		lastStation = new DoubleNode<>(station);
+		
+	}
+	
+	public void addNextStation(Station nextStation){
+		
+		DoubleNode<Station> stationNode = new DoubleNode<>(nextStation);
+		
+		stationNode.setNext(lastStation);
+		
+	}
+	
+	public int Size(){
+		
+		int stationCount = 0;
+		DoubleNode<Station> currentStation = lastStation;
+		while(currentStation != null){
+			stationCount ++;
+			currentStation = currentStation.getNext();
+		}
+		
+		return stationCount;
+		
+	}
+	
 	/**
 	 * Get the Line Name
 	 * 
