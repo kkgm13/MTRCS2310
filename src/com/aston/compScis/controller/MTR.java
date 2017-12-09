@@ -34,7 +34,6 @@ public class MTR implements Controller {
 	public MTR() {
 		// Initialise MTRMetro
 		metroData = new MTRMetro();
-
 		
 		line = new Line(new Station(metroData.getMTRLines().get(0)));
 
@@ -59,8 +58,8 @@ public class MTR implements Controller {
 			// Append the results to output the Train Line name
 			results += ("Train Line: " + pair.getKey().getLineName() + "\n");
 			// Append the results to output the terminus of the train line
-			results += ("This train goes from:\t " + pair.getValue().get(0).getStationName() + " --- "
-					+ pair.getValue().get(pair.getValue().size() - 1).getStationName() + "\n\n");
+			results += ("This train goes from:\t " + pair.getValue().get(0).toString() + " --- "
+					+ pair.getValue().get(pair.getValue().size() - 1).toString() + "\n\n");
 		}
 		// Pass to the UI
 		return results;
@@ -90,13 +89,13 @@ public class MTR implements Controller {
 				// Loop Over the ArrayList in the HashMap
 				for (int i = 0; i < pair.getValue().size(); i++) {
 					// If the current index is the size
-					if (pair.getValue().get(i).getStationName() == pair.getValue().get(pair.getValue().size() - 1)
-							.getStationName()) {
+					if (pair.getValue().get(i).toString() == pair.getValue().get(pair.getValue().size() - 1)
+							.toString()) {
 						// Present the LAST line station
-						results += pair.getValue().get(i).getStationName();
+						results += pair.getValue().get(i).toString();
 					} else {
 						// Present the Line station
-						results += pair.getValue().get(i).getStationName() + " --- ";
+						results += pair.getValue().get(i).toString() + " --- ";
 					}
 				}
 				// New Line
@@ -115,13 +114,12 @@ public class MTR implements Controller {
 	public String listAllDirectlyConnectedLines(String line) {
 		// Result Variable to pass to the UI
 		String results = "";
-		// Iterate over the HashMap information
 		// To get the intended line
 		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
 		// To get the matching Stations
 		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
-		Station station = new Station(null);
+		Station station = new Station(metroData.getMTRLines().toString());
 		Line searchedLine = new Line(station);
 		// Station created
 		List<Station> searchedLineStations;
@@ -165,8 +163,8 @@ public class MTR implements Controller {
 				for (int i = 0; i < searchedLine.getStations().size(); i++) {
 					// If a station from the local HashMap (pair) contains a station from the Line
 					// Object (searchedLine)
-					if (searchedLine.getStations().get(i).getStationName()
-							.contains(pair.getValue().get(j).getStationName())) {
+					if (searchedLine.getStations().get(i).toString()
+							.contains(pair.getValue().get(j).toString())) {
 						// If the stations are the same
 						while (!hasLine) {
 							if (searchedLine.getLineName().equalsIgnoreCase(pair.getKey().getLineName())) {

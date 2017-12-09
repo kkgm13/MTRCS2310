@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ public class ReadFile {
 	private Line line;
 	// Station Class
 	private Station station;
+	//
+	private List<Station> stationList;
 
 	/**
 	 * Store the data of the CSV file to the HashMap(Line, List of Stations)
@@ -54,9 +57,13 @@ public class ReadFile {
 				// Loop on the Array CSV line
 				for (int i = 1; i < listOfStations.length; i++) {
 					// Create a new Station
-					station = new Station(null);
+					station = new Station(listOfStations[i]);
+					//Creat LinkedList
+					stationList = new LinkedList();
+					//Add Station Model to the Linked List
+					stationList.add(station);
 					// Set the new Station
-					station.setStationName(listOfStations[i]);
+					station.setStationList(stationList);
 					// Add the station to the List of Stations
 					line.getStations().add(station);
 				}

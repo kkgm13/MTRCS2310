@@ -13,14 +13,25 @@ import java.util.List;
 public class Station {
 
 	//Station Name
-	private List<Station> stationName;
+	private String stationName;
+	//Station Node
+	private List<Station> stationList;
 	
 	public Station() {
 		
 	}
 	
-	public Station(List<Station> stationName) {
+	public Station(String stationName) {
 		this.stationName = stationName;
+	}
+	
+	public String toString() {
+		return stationName;
+	}
+	
+	
+	public Station(List<Station> stationList) {
+		this.stationList = stationList;
 	}
 	
 	/**
@@ -28,8 +39,8 @@ public class Station {
 	 * 
 	 * @return Name of the Station 
 	 */
-	public List<Station> getStationName() {
-		return stationName;
+	public List<Station> getStationList() {
+		return stationList;
 	}
 
 	/**
@@ -37,8 +48,22 @@ public class Station {
 	 * 
 	 * @param stationName
 	 */
-	public void setStationName(List<Station> stationName) {
-		this.stationName = stationName;
+	public void setStationList(List<Station> stationList) {
+		this.stationList = stationList;
 	}
+
+	/**
+	 * @return the stationName
+	 */
+//	public String getStationName() {
+//		return stationName;
+//	}
+
+	/**
+	 * @param stationName the stationName to set
+	 */
+//	public void setStationName(String stationName) {
+//		this.stationName = stationName;
+//	}
 
 }
