@@ -1,5 +1,7 @@
 package com.aston.compScis.model;
 
+import java.util.List;
+
 /**
  * <h1>Station Class</h1>
  * <p>This class shows any information related to the MTR Stations.
@@ -11,14 +13,22 @@ package com.aston.compScis.model;
 public class Station {
 
 	//Station Name
-	private String stationName;
+	private List<Station> stationName;
+	
+	public Station() {
+		
+	}
+	
+	public Station(List<Station> stationName) {
+		this.stationName = stationName;
+	}
 	
 	/**
 	 * Get Station Name
 	 * 
 	 * @return Name of the Station 
 	 */
-	public String getStationName() {
+	public List<Station> getStationName() {
 		return stationName;
 	}
 
@@ -27,7 +37,7 @@ public class Station {
 	 * 
 	 * @param stationName
 	 */
-	public void setStationName(String stationName) {
+	public void setStationName(List<Station> stationName) {
 		this.stationName = stationName;
 	}
 

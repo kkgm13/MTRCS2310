@@ -54,7 +54,7 @@ public class ReadFile {
 				// Loop on the Array CSV line
 				for (int i = 1; i < listOfStations.length; i++) {
 					// Create a new Station
-					station = new Station();
+					station = new Station(null);
 					// Set the new Station
 					station.setStationName(listOfStations[i]);
 					// Add the station to the List of Stations

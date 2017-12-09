@@ -25,15 +25,23 @@ public class MTR implements Controller {
 
 	// Line Class
 	private MTRMetro metroData;
-	
+
+	private Line line;
+
 	/**
 	 * MTR Constructor
 	 */
 	public MTR() {
-		//Initialise MTRMetro
+		// Initialise MTRMetro
 		metroData = new MTRMetro();
+
+		
+		line = new Line(new Station(metroData.getMTRLines().get(0)));
+
+		line.addNextStation(new Station(metroData.getMTRLines().get(1)));
+
 	}
-	
+
 	/**
 	 * Get the Train Line Name and the Terminus of the Line
 	 * 
@@ -113,12 +121,12 @@ public class MTR implements Controller {
 		// To get the matching Stations
 		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
-		Station station = new Station();
+		Station station = new Station(null);
 		Line searchedLine = new Line(station);
 		// Station created
 		List<Station> searchedLineStations;
 		searchedLineStations = new ArrayList<>();
-		
+
 		/*
 		 * Search for the line
 		 */
@@ -145,11 +153,11 @@ public class MTR implements Controller {
 		 */
 		// True/False if the line has been written
 		boolean hasLine;
-		//Loop while second local file 
+		// Loop while second local file
 		while (it.hasNext()) {
 			// Make a new HashMap stating the iteration
 			Entry<Line, List<Station>> pair = it.next();
-			//set to false
+			// set to false
 			hasLine = false;
 			// Loop over Local HashMap
 			for (int j = 0; j < pair.getValue().size(); j++) {
@@ -167,7 +175,7 @@ public class MTR implements Controller {
 							} else {
 								// Input the Information of the line
 								results += "- " + pair.getKey().getLineName() + "\n\t";
-								//Line that has been inserted is known
+								// Line that has been inserted is known
 								hasLine = true;
 
 							}
@@ -185,11 +193,11 @@ public class MTR implements Controller {
 		}
 		// Present to the user
 		return results;
-		
+
 	}
 
 	public String showPathBetween(String stationA, String stationB) {
-		// TODO Auto-generated method stub
+
 		return "hello";
 	}
 
