@@ -48,7 +48,7 @@ public class ReadFile {
 				// Split the data and store in an Array
 				String[] listOfStations = dataLine.split(cvsSplitby);
 				// Create empty line
-				line = new Line();
+				line = new Line(station);
 				// Store the key based on the first index of the Array
 				line.setLineName(listOfStations[0]);
 				// Loop on the Array CSV line

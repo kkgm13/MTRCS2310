@@ -58,6 +58,8 @@ public class MTR implements Controller {
 					+ pair.getValue().get(pair.getValue().size() - 1).getStationName() + "\n\n");
 			// Pop it out from the iteration
 			it.remove();
+			
+
 		}
 		// Pass to the UI
 		return results;
@@ -125,7 +127,8 @@ public class MTR implements Controller {
 		// To get the matching Stations
 		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
-		Line searchedLine = new Line();
+		Station station = new Station();
+		Line searchedLine = new Line(station);
 		// Station created
 		List<Station> searchedLineStations;
 		searchedLineStations = new ArrayList<>();
@@ -230,6 +233,7 @@ public class MTR implements Controller {
 		}
 		// Present to the user
 		return results;
+		
 	}
 
 	public String showPathBetween(String stationA, String stationB) {
