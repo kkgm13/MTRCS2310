@@ -3,7 +3,6 @@ package com.aston.compScis.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,9 +20,9 @@ import java.util.List;
  */
 public class ReadFile {
 	// Hash Map Data Structure to save the Line and Station
-	private HashMap<Line, List<Station>> mtrLine;
+	protected HashMap<Line, List<Station>> mtrLine;
 	// File Name Path Name
-	private String fileName = "MTRsystem_partial.csv";
+	final String fileName = "MTRsystem_partial.csv";
 	// Line Class
 	private Line line;
 	// Station Class
@@ -31,12 +30,19 @@ public class ReadFile {
 	//
 	private List<Station> stationList;
 
+	public ReadFile() {
+		station = new Station(null);
+		// Create a new HashMap
+		mtrLine = new HashMap<>();
+		getLine();
+	}
+	
 	/**
 	 * Store the data of the CSV file to the HashMap(Line, List of Stations)
 	 * 
 	 * @return MTR Data as a HashMap with the Key of Lines
 	 */
-	public void getLine() {
+	private void getLine() {
 		// Variable to store and split information
 		String dataLine;
 		// Variable to detect the delimiting code
@@ -44,8 +50,6 @@ public class ReadFile {
 
 		// Grab the CSV data
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			// Create a new HashMap
-			mtrLine = new HashMap<>();
 			// While the data is being grabbed
 			while ((dataLine = br.readLine()) != null) {
 				// Split the data and store in an Array
@@ -54,21 +58,19 @@ public class ReadFile {
 				line = new Line(station);
 				// Store the key based on the first index of the Array
 				line.setLineName(listOfStations[0]);
+				//Create LinkedList
+				stationList = new LinkedList<Station>();
 				// Loop on the Array CSV line
 				for (int i = 1; i < listOfStations.length; i++) {
-					// Create a new Station
+					// Create a new Station with the name
 					station = new Station(listOfStations[i]);
-					//Creat LinkedList
-					stationList = new LinkedList();
-					//Add Station Model to the Linked List
-					stationList.add(station);
-					// Set the new Station
-					station.setStationList(stationList);
 					// Add the station to the List of Stations
-					line.getStations().add(station);
+					line.addNextStation(station);
+					stationList.add(station);
 				}
 				// Place it into the HashMap
-				mtrLine.put(line, line.getStations());
+				//mtrLine.put(line, line.getStations());
+				mtrLine.put(line, stationList);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

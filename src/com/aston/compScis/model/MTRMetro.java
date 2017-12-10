@@ -1,6 +1,5 @@
 package com.aston.compScis.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,10 +12,7 @@ import java.util.List;
  *
  */
 public class MTRMetro {
-	//Line Class
-	private Line line;
-	//List of Stations
-	private List<Station> stations;
+
 	//Main Data Holder as a HashMap of Lines and a List of Related Stations
 	private HashMap<Line, List<Station>> mtrLine;
 	//CSV Reader
@@ -29,17 +25,15 @@ public class MTRMetro {
 	public MTRMetro() {
 		//Initialise Variables
 		file = new ReadFile();
-		stations = new ArrayList<>();
 		mtrLine = new HashMap<Line, List<Station>>();
 		//Get the Data
-		getMTRLineData();
+		getMTRData();
 	}
 	
 	/**
 	 * Get the Data from the Read File
 	 */
-	public void getMTRLineData() {
-		file.getLine();
+	public void getMTRData() {
 		mtrLine = file.getMtrLine();
 	}
 	

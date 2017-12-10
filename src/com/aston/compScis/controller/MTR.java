@@ -26,19 +26,12 @@ public class MTR implements Controller {
 	// Line Class
 	private MTRMetro metroData;
 
-	private Line line;
-
 	/**
 	 * MTR Constructor
 	 */
 	public MTR() {
 		// Initialise MTRMetro
 		metroData = new MTRMetro();
-		
-		line = new Line(new Station(metroData.getMTRLines().get(0)));
-
-		line.addNextStation(new Station(metroData.getMTRLines().get(1)));
-
 	}
 
 	/**
@@ -57,9 +50,10 @@ public class MTR implements Controller {
 			Entry<Line, List<Station>> pair = it.next();
 			// Append the results to output the Train Line name
 			results += ("Train Line: " + pair.getKey().getLineName() + "\n");
-			// Append the results to output the terminus of the train line
-			results += ("This train goes from:\t " + pair.getValue().get(0).toString() + " --- "
-					+ pair.getValue().get(pair.getValue().size() - 1).toString() + "\n\n");
+			// Append the results to output the starting terminus of the train line
+			results += ("This train goes from:\t " + pair.getValue().get(0).toString() + " --- ");
+			// Append the results to output the ending terminus of the train line
+			results += (pair.getValue().get(pair.getValue().size() - 1).toString() + "\n\n");
 		}
 		// Pass to the UI
 		return results;
@@ -89,8 +83,7 @@ public class MTR implements Controller {
 				// Loop Over the ArrayList in the HashMap
 				for (int i = 0; i < pair.getValue().size(); i++) {
 					// If the current index is the size
-					if (pair.getValue().get(i).toString() == pair.getValue().get(pair.getValue().size() - 1)
-							.toString()) {
+					if (pair.getValue().get(i).toString() == pair.getValue().get(pair.getValue().size() - 1).toString()) {
 						// Present the LAST line station
 						results += pair.getValue().get(i).toString();
 					} else {
@@ -119,7 +112,7 @@ public class MTR implements Controller {
 		// To get the matching Stations
 		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
 		// Create the intended Line for User
-		Station station = new Station(metroData.getMTRLines().toString());
+		Station station = new Station(metroData.getMTRLines().toString()); //????
 		Line searchedLine = new Line(station);
 		// Station created
 		List<Station> searchedLineStations;
@@ -128,61 +121,61 @@ public class MTR implements Controller {
 		/*
 		 * Search for the line
 		 */
-		while (it2.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it2.next();
-			// If the searched line is the line in the
-			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
-				// Set the Name of the Line
-				searchedLine.setLineName(pair.getKey().getLineName());
-				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
-				// Loop through the HashMap Station Values
-				for (int i = 0; i < pair.getValue().size(); i++) {
-					// Add to the ArrayList
-					searchedLineStations.add(pair.getValue().get(i));
-				}
-				// Add list to the stations
-				searchedLine.setStations(searchedLineStations);
-			}
-		}
+//		while (it2.hasNext()) {
+//			// Make a new HashMap stating the iteration
+//			Entry<Line, List<Station>> pair = it2.next();
+//			// If the searched line is the line in the
+//			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
+//				// Set the Name of the Line
+//				searchedLine.setLineName(pair.getKey().getLineName());
+//				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
+//				// Loop through the HashMap Station Values
+//				for (int i = 0; i < pair.getValue().size(); i++) {
+//					// Add to the ArrayList
+//					searchedLineStations.add(pair.getValue().get(i));
+//				}
+//				// Add list to the stations
+//				searchedLine.setStations(searchedLineStations);
+//			}
+//		}
 
 		/*
 		 * Compare the Line's station against
 		 */
 		// True/False if the line has been written
-		boolean hasLine;
-		// Loop while second local file
-		while (it.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it.next();
-			// set to false
-			hasLine = false;
-			// Loop over Local HashMap
-			for (int j = 0; j < pair.getValue().size(); j++) {
-				// Loop over Line Object
-				for (int i = 0; i < searchedLine.getStations().size(); i++) {
-					// If a station from the local HashMap (pair) contains a station from the Line
-					// Object (searchedLine)
-					if (searchedLine.getStations().get(i).toString()
-							.contains(pair.getValue().get(j).toString())) {
-						// If the stations are the same
-						while (!hasLine) {
-							if (searchedLine.getLineName().equalsIgnoreCase(pair.getKey().getLineName())) {
-								// do nothing
-								break;
-							} else {
-								// Input the Information of the line
-								results += "- " + pair.getKey().getLineName() + "\n\t";
-								// Line that has been inserted is known
-								hasLine = true;
-
-							}
-						}
-					}
-				}
-			}
-			hasLine = false;
-		}
+//		boolean hasLine;
+//		// Loop while second local file
+//		while (it.hasNext()) {
+//			// Make a new HashMap stating the iteration
+//			Entry<Line, List<Station>> pair = it.next();
+//			// set to false
+//			hasLine = false;
+//			// Loop over Local HashMap
+//			for (int j = 0; j < pair.getValue().size(); j++) {
+//				// Loop over Line Object
+//				for (int i = 0; i < searchedLine.getStations().size(); i++) {
+//					// If a station from the local HashMap (pair) contains a station from the Line
+//					// Object (searchedLine)
+//					if (searchedLine.getStations().get(i).toString()
+//							.contains(pair.getValue().get(j).toString())) {
+//						// If the stations are the same
+//						while (!hasLine) {
+//							if (searchedLine.getLineName().equalsIgnoreCase(pair.getKey().getLineName())) {
+//								// do nothing
+//								break;
+//							} else {
+//								// Input the Information of the line
+//								results += "- " + pair.getKey().getLineName() + "\n\t";
+//								// Line that has been inserted is known
+//								hasLine = true;
+//
+//							}
+//						}
+//					}
+//				}
+//			}
+//			hasLine = false;
+//		}
 
 		// If the Lines isn't known
 		if (results == "") {

@@ -1,8 +1,5 @@
 package com.aston.compScis.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <h1>Line</h1>
  * <p>This class stores any related information about the MTR's Line.
@@ -14,36 +11,31 @@ import java.util.List;
 public class Line {
 	//Name of the Line
 	private String lineName;
-	//List of Station Objects
-	private List<Station> stations = new ArrayList<>();
-	
-	private DoubleNode<Station>lastStation;
+	//DoubleNode List of Stations
+	private DoubleNode<Station> lastStation;
+	private DoubleNode<Station> nextStation;
 	
 	public Line(Station station){
-		
 		lastStation = new DoubleNode<>(station);
-		
 	}
 	
-	public void addNextStation(Station nextStation){
-		
-		DoubleNode<Station> stationNode = new DoubleNode<>(nextStation);
-		
+	public void addNextStation(Station currentStation){
+		DoubleNode<Station> stationNode = new DoubleNode<>(currentStation);
 		stationNode.setNext(lastStation);
+		stationNode.setPrevious(nextStation);
+		lastStation = stationNode;
+//		nextStation = lastStation.getNext(); //Questionable Area
 		
 	}
 	
-	public int Size(){
-		
+	public int size(){
 		int stationCount = 0;
 		DoubleNode<Station> currentStation = lastStation;
 		while(currentStation != null){
 			stationCount ++;
 			currentStation = currentStation.getNext();
 		}
-		
 		return stationCount;
-		
 	}
 	
 	/**
@@ -63,23 +55,4 @@ public class Line {
 	public void setLineName(String lineName) {
 		this.lineName = lineName;
 	}
-
-	/**
-	 * Get the List of Stations
-	 * 
-	 * @return List of Stations
-	 */
-	public List<Station> getStations() {
-		return stations;
-	}
-
-	/**
-	 * Set the List of Stations
-	 * 
-	 * @param stations
-	 */
-	public void setStations(List<Station> stations) {
-		this.stations = stations;
-	}
-
 }
