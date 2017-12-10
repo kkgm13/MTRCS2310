@@ -1,7 +1,7 @@
 package com.aston.compScis.controller;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +21,7 @@ import com.aston.compScis.model.Station;
  * @version 1.0
  *
  */
-public class MTR implements Controller {
+public class RequestHandler implements Controller {
 
 	// Line Class
 	private MTRMetro metroData;
@@ -29,13 +29,13 @@ public class MTR implements Controller {
 	/**
 	 * MTR Constructor
 	 */
-	public MTR() {
+	public RequestHandler() {
 		// Initialise MTRMetro
 		metroData = new MTRMetro();
 	}
 
 	/**
-	 * Get the Train Line Name and the Terminus of the Line
+	 * Get All lines with their respected Terminus
 	 * 
 	 * @return Train line Name and the Terminus of the line
 	 */
@@ -43,52 +43,51 @@ public class MTR implements Controller {
 		// Result Variable to pass to the UI
 		String results = "\n";
 		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
 		// While the HashMap has next information
-		while (it.hasNext()) {
+		while (itrData.hasNext()) {
 			// Make a new Entry of HashMaps
-			Entry<Line, List<Station>> pair = it.next();
+			Entry<Line, List<Station>> data = itrData.next();
 			// Append the results to output the Train Line name
-			results += ("Train Line: " + pair.getKey().getLineName() + "\n");
+			results += ("Train Line: " + data.getKey().getLineName() + "\n");
 			// Append the results to output the starting terminus of the train line
-			results += ("This train goes from:\t " + pair.getValue().get(0).toString() + " --- ");
+			results += ("This train goes from:\t " + data.getValue().get(0).toString() + " --- ");
 			// Append the results to output the ending terminus of the train line
-			results += (pair.getValue().get(pair.getValue().size() - 1).toString() + "\n\n");
+			results += (data.getValue().get(data.getValue().size() - 1).toString() + "\n\n");
 		}
 		// Pass to the UI
 		return results;
 	}
 
 	/**
-	 * List all the train stations of the train line
+	 * List all the stations of the User's desired line
 	 * 
-	 * @param line
-	 *            Name of the Intended Train Line
-	 * @return The Train and the Stations Associated
+	 * @param line Name of the Intended Train Line
+	 * @return The Train Line and the Associated Stations 
 	 */
 	public String listStationsInLine(String line) {
 		// Result Variable to pass to the UI
 		String results = "";
 		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
+		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
 		// while the HashMap has next information
-		while (it.hasNext()) {
+		while (itrData.hasNext()) {
 			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it.next();
+			Entry<Line, List<Station>> data = itrData.next();
 			// If the HashMap Key is the requested Line
-			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
+			if (data.getKey().getLineName().equalsIgnoreCase(line)) {
 				// Present the Train Line Name
-				results += ("\nTrain Line: " + pair.getKey().getLineName() + "\n");
+				results += ("\nTrain Line: " + data.getKey().getLineName() + "\n");
 				results += ("This train goes from:\t ");
 				// Loop Over the ArrayList in the HashMap
-				for (int i = 0; i < pair.getValue().size(); i++) {
+				for (int i = 0; i < data.getValue().size(); i++) {
 					// If the current index is the size
-					if (pair.getValue().get(i).toString() == pair.getValue().get(pair.getValue().size() - 1).toString()) {
+					if (data.getValue().get(i).toString() == data.getValue().get(data.getValue().size() - 1).toString()) {
 						// Present the LAST line station
-						results += pair.getValue().get(i).toString();
+						results += data.getValue().get(i).toString();
 					} else {
 						// Present the Line station
-						results += pair.getValue().get(i).toString() + " --- ";
+						results += data.getValue().get(i).toString() + " --- ";
 					}
 				}
 				// New Line
@@ -104,6 +103,12 @@ public class MTR implements Controller {
 		return results;
 	}
 
+	/**
+	 * List all the connected lines of the User's Desired Line
+	 * 
+	 * @param line Name of the Intended Line
+	 * @return The Train Line and the Interconnected Lines  
+	 */
 	public String listAllDirectlyConnectedLines(String line) {
 		// Result Variable to pass to the UI
 		String results = "";
@@ -116,28 +121,25 @@ public class MTR implements Controller {
 		Line searchedLine = new Line(station);
 		// Station created
 		List<Station> searchedLineStations;
-		searchedLineStations = new ArrayList<>();
+		searchedLineStations = new LinkedList<>();
 
 		/*
 		 * Search for the line
 		 */
-//		while (it2.hasNext()) {
-//			// Make a new HashMap stating the iteration
-//			Entry<Line, List<Station>> pair = it2.next();
-//			// If the searched line is the line in the
-//			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
-//				// Set the Name of the Line
-//				searchedLine.setLineName(pair.getKey().getLineName());
-//				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
-//				// Loop through the HashMap Station Values
-//				for (int i = 0; i < pair.getValue().size(); i++) {
-//					// Add to the ArrayList
-//					searchedLineStations.add(pair.getValue().get(i));
-//				}
-//				// Add list to the stations
-//				searchedLine.setStations(searchedLineStations);
-//			}
-//		}
+		while (it2.hasNext()) {
+			// Make a new HashMap stating the iteration
+			Entry<Line, List<Station>> pair = it2.next();
+			// If the searched line is the line in the
+			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
+				// Set the Name of the Line
+				searchedLine.setLineName(pair.getKey().getLineName());
+				results += "The " + searchedLine.getLineName() + " connects with the following lines: \n\t";
+				// Loop through the HashMap Station Values
+				for (int i = 0; i < pair.getValue().size(); i++) {
+					searchedLine.addNextStation(pair.getValue().get(i));
+				}
+			}
+		}
 
 		/*
 		 * Compare the Line's station against
