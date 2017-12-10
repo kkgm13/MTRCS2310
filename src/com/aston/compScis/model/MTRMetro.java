@@ -33,7 +33,7 @@ public class MTRMetro {
 	/**
 	 * Get the Data from the Read File
 	 */
-	public void getMTRData() {
+	private void getMTRData() {
 		mtrLine = file.getMtrLine();
 	}
 	
