@@ -1,5 +1,9 @@
 package com.aston.compScis.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import com.aston.compScis.model.Station;
 /**
  * <h1>Line</h1>
  * <p>This class stores any related information about the MTR's Line.
@@ -15,8 +19,19 @@ public class Line {
 	private DoubleNode<Station> lastStation;
 	private DoubleNode<Station> nextStation;
 	
+	private List<DoubleNode<Station>> stationList;
+	
+	public List<DoubleNode<Station>> getStationList() {
+		return stationList;
+	}
+
+	public void setStationList(List<DoubleNode<Station>> stationList) {
+		this.stationList = stationList;
+	}
+
 	public Line(Station station){
-		lastStation = new DoubleNode<>(station);
+		stationList = new LinkedList<>();
+		lastStation = new DoubleNode<>();
 	}
 	
 	public void addNextStation(Station currentStation){
@@ -24,10 +39,14 @@ public class Line {
 		stationNode.setNext(lastStation);
 		stationNode.setPrevious(nextStation);
 		lastStation = stationNode;
-//		nextStation = lastStation.getNext(); //Questionable Area
-		
+		stationList.add(stationNode);
 	}
 	
+	/**
+	 * Size of the DoubleNode
+	 * 
+	 * @return the size of the DoubleNode
+	 */
 	public int size(){
 		int stationCount = 0;
 		DoubleNode<Station> currentStation = lastStation;
@@ -55,4 +74,5 @@ public class Line {
 	public void setLineName(String lineName) {
 		this.lineName = lineName;
 	}
+	
 }

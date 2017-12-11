@@ -3,8 +3,8 @@ package com.aston.compScis.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -59,7 +59,7 @@ public class ReadFile {
 				// Store the key based on the first index of the Array
 				line.setLineName(listOfStations[0]);
 				//Create LinkedList
-				stationList = new LinkedList<Station>();
+				stationList = new ArrayList<Station>();
 				// Loop on the Array CSV line
 				for (int i = 1; i < listOfStations.length; i++) {
 					// Create a new Station with the name

@@ -14,8 +14,8 @@ public class Station {
 	private String stationName;
 	
 	public Station() {
-		
-	}
+		stationName = null;
+	}	
 	
 	public Station(String stationName) {
 		this.stationName = stationName;
@@ -24,5 +24,4 @@ public class Station {
 	public String toString() {
 		return stationName;
 	}
-
 }
