@@ -1,5 +1,6 @@
 package com.aston.compScis.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map.Entry;
 
 import com.aston.compScis.model.DoubleNode;
 import com.aston.compScis.model.Line;
+import com.aston.compScis.model.LinkedStack;
 import com.aston.compScis.model.MTRMetro;
 import com.aston.compScis.model.Station;
 
@@ -202,7 +204,7 @@ public class RequestHandler implements Controller {
 	 * @return The path between the Starting station and the Ending station
 	 */
 	public String showPathBetween(String stationA, String stationB) {
-		String results = "hello \n";
+		String results = "";
 		// Create Nodes
 		DoubleNode<Station> startStation = null;
 		DoubleNode<Station> endStation = null;
@@ -225,8 +227,6 @@ public class RequestHandler implements Controller {
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
 					//Create the Station based on the data
 					firstStation = new Station(pair.getValue().get(i).toString());
-					//Create the DoubleNode for the 
-					startStation = new DoubleNode<Station>(firstStation);
 					//Make it true
 					firstGot = true;
 				}
@@ -234,16 +234,27 @@ public class RequestHandler implements Controller {
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
 					//Create the Station based on the data
 					lastStation = new Station(pair.getValue().get(i).toString());
-					//Create the DoubleNode for the 
-					endStation = new DoubleNode<Station>(lastStation);
 					//Make it true
 					lastGot = true;
 				}
 			}
 		}
 
+		// Create the LinkedStack
+		LinkedStack<Station> routePath = new LinkedStack<Station>();
+		// First Station to be placed inside the Stack
+		routePath.push(firstStation);
+		/*
+		 * Stuff to get between the first Station and the Last Station
+		 */
+		// Last Staion to be placed inside the Stack
+		routePath.push(lastStation);
 		
 		
+		List<Station> reversedStack = new ArrayList<Station>();
+
+		
+		results += "To get to " + firstStation.toString() + " to " + lastStation.toString()+ ",\n the route to take is:\n";
 		
 		return results;
 	}
