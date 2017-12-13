@@ -20,14 +20,6 @@ public class Line {
 	private DoubleNode<Station> nextStation;
 	
 	private List<DoubleNode<Station>> stationList;
-	
-	public List<DoubleNode<Station>> getStationList() {
-		return stationList;
-	}
-
-	public void setStationList(List<DoubleNode<Station>> stationList) {
-		this.stationList = stationList;
-	}
 
 	public Line(Station station){
 		stationList = new LinkedList<>();
@@ -73,6 +65,14 @@ public class Line {
 	 */
 	public void setLineName(String lineName) {
 		this.lineName = lineName;
+	}
+	
+	public List<DoubleNode<Station>> getStationList() {
+		return stationList;
+	}
+
+	public void setStationList(List<DoubleNode<Station>> stationList) {
+		this.stationList = stationList;
 	}
 	
 }

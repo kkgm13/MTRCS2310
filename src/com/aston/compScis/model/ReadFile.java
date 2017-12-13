@@ -22,7 +22,7 @@ public class ReadFile {
 	// Hash Map Data Structure to save the Line and Station
 	protected HashMap<Line, List<Station>> mtrLine;
 	// File Name Path Name
-	final String fileName = "MTRsystem_partial.csv";
+	protected String fileName = "MTRsystem_partial.csv";
 	// Line Class
 	private Line line;
 	// Station Class
@@ -69,7 +69,6 @@ public class ReadFile {
 					stationList.add(station);
 				}
 				// Place it into the HashMap
-				//mtrLine.put(line, line.getStations());
 				mtrLine.put(line, stationList);
 			}
 		} catch (IOException e) {

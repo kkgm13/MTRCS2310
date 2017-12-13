@@ -17,7 +17,6 @@ public class LinkedStack <T> implements StackADT<T> {
 	@Override
 	//Pushes element to the head of the linkedstack
 	public void push(T element) {
-		
 		DoubleNode<T> tmp = new DoubleNode<T> (element);
 		tmp.setNext(top);
 		top = tmp;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.aston.compScis.model.DoubleNode;
 import com.aston.compScis.model.Line;
 import com.aston.compScis.model.MTRMetro;
 import com.aston.compScis.model.Station;
@@ -62,8 +63,9 @@ public class RequestHandler implements Controller {
 	/**
 	 * List all the stations of the User's desired line
 	 * 
-	 * @param line Name of the Intended Train Line
-	 * @return The Train Line and the Associated Stations 
+	 * @param line
+	 *            Name of the Intended Train Line
+	 * @return The Train Line and the Associated Stations
 	 */
 	public String listStationsInLine(String line) {
 		// Result Variable to pass to the UI
@@ -82,7 +84,8 @@ public class RequestHandler implements Controller {
 				// Loop Over the ArrayList in the HashMap
 				for (int i = 0; i < data.getValue().size(); i++) {
 					// If the current index is the size
-					if (data.getValue().get(i).toString() == data.getValue().get(data.getValue().size() - 1).toString()) {
+					if (data.getValue().get(i).toString() == data.getValue().get(data.getValue().size() - 1)
+							.toString()) {
 						// Present the LAST line station
 						results += data.getValue().get(i).toString();
 					} else {
@@ -106,8 +109,9 @@ public class RequestHandler implements Controller {
 	/**
 	 * List all the connected lines of the User's Desired Line
 	 * 
-	 * @param line Name of the Intended Line
-	 * @return The Train Line and the Interconnected Lines  
+	 * @param line
+	 *            Name of the Intended Line
+	 * @return The Train Line and the Interconnected Lines
 	 */
 	public String listAllDirectlyConnectedLines(String line) {
 		// Result Variable to pass to the UI
@@ -127,14 +131,14 @@ public class RequestHandler implements Controller {
 			Entry<Line, List<Station>> pair = it2.next();
 			// If the searched line is the line in the
 			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
-				//Add the Line Name
+				// Add the Line Name
 				searchedLine.setLineName(pair.getKey().getLineName());
-				//Append the result
+				// Append the result
 				results += "The " + pair.getKey().getLineName() + " connects with the following lines: \n\t";
 				// Loop through the HashMap Station Values
 				for (int i = 0; i < pair.getValue().size(); i++) {
-					//Add the Double Node of stations
-					searchedLine.addNextStation(pair.getValue().get(i));					
+					// Add the Double Node of stations
+					searchedLine.addNextStation(pair.getValue().get(i));
 				}
 			}
 		}
@@ -144,23 +148,25 @@ public class RequestHandler implements Controller {
 		 */
 		// True/False if the line has been written
 		boolean hasLine;
-//		// Loop while second local file
+		// Loop while second local file
 		while (it.hasNext()) {
-//			// Make a new HashMap stating the iteration
+			// Make a new HashMap stating the iteration
 			Entry<Line, List<Station>> pair = it.next();
-//			// set to false
+			// set to false
 			hasLine = false;
-//			// Loop over Iteration HashMap
+			// Loop over Iteration HashMap
 			for (int j = 0; j < pair.getValue().size(); j++) {
-//				// Loop over Line Object
+				// Loop over Line Object
 				for (int i = 0; i < searchedLine.getStationList().size(); i++) {
-//					// If a station from the local HashMap (pair) contains a station from the Line Object (searchedLine)
-					if(searchedLine.getStationList().get(i).getElement().toString().equals(pair.getValue().get(j).toString())) {
-						//While no iteration of the line is known 
+					// If a station from the local HashMap (pair) contains a station from the Line
+					// Object (searchedLine)
+					if (searchedLine.getStationList().get(i).getElement().toString()
+							.equals(pair.getValue().get(j).toString())) {
+						// While no iteration of the line is known
 						while (!hasLine) {
-							//If the line are exactly the same	
+							// If the line are exactly the same
 							if (searchedLine.getLineName().equals(pair.getKey().getLineName())) {
-								//DO NOT CHANGE : WILL NOT ADD THE EXACT LINE IT IS LOOKING FOR
+								// DO NOT CHANGE
 								break;
 							} else {
 								// Input the Information of the line
@@ -172,6 +178,7 @@ public class RequestHandler implements Controller {
 					}
 				}
 			}
+			// Reset Boolean
 			hasLine = false;
 		}
 
@@ -185,8 +192,60 @@ public class RequestHandler implements Controller {
 
 	}
 
+	/**
+	 * Show the station path between two stations
+	 * 
+	 * @param stationA
+	 *            Name of the Starting Station
+	 * @param stationB
+	 *            Name of the Ending Station
+	 * @return The path between the Starting station and the Ending station
+	 */
 	public String showPathBetween(String stationA, String stationB) {
-		return "hello";
+		String results = "hello \n";
+		// Create Nodes
+		DoubleNode<Station> startStation = null;
+		DoubleNode<Station> endStation = null;
+		// Create Station Class
+		Station firstStation = null;
+		Station lastStation = null;
+
+		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
+
+		// Condition to stop literating over
+		boolean firstGot = false;
+		boolean lastGot = false;
+		// While data has more information
+		while (itrData.hasNext()) {
+			//Create Entry from iterator
+			Entry<Line, List<Station>> pair = itrData.next();
+			//Loop over the data
+			for (int i = 0; i < pair.getValue().size(); i++) {
+				//If Starting Station does match the user's intended station and hasn't been captured.
+				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
+					//Create the Station based on the data
+					firstStation = new Station(pair.getValue().get(i).toString());
+					//Create the DoubleNode for the 
+					startStation = new DoubleNode<Station>(firstStation);
+					//Make it true
+					firstGot = true;
+				}
+				//If Ending Station does match the user's intended station and hasn't been captured.
+				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
+					//Create the Station based on the data
+					lastStation = new Station(pair.getValue().get(i).toString());
+					//Create the DoubleNode for the 
+					endStation = new DoubleNode<Station>(lastStation);
+					//Make it true
+					lastGot = true;
+				}
+			}
+		}
+
+		
+		
+		
+		return results;
 	}
 
 }
