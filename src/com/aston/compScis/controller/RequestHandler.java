@@ -214,7 +214,7 @@ public class RequestHandler implements Controller {
 
 		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
 
-		// Condition to stop literating over
+		// Condition to stop iterating over
 		boolean firstGot = false;
 		boolean lastGot = false;
 		// While data has more information
@@ -227,15 +227,20 @@ public class RequestHandler implements Controller {
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
 					//Create the Station based on the data
 					firstStation = new Station(pair.getValue().get(i).toString());
+					startStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
+					
 					//Make it true
 					firstGot = true;
+					System.out.println("this is " +firstStation+"\n"+startStation.getElement());
 				}
 				//If Ending Station does match the user's intended station and hasn't been captured.
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
 					//Create the Station based on the data
 					lastStation = new Station(pair.getValue().get(i).toString());
+					endStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
 					//Make it true
 					lastGot = true;
+					System.out.println("this is " +lastStation+"\n"+endStation.getElement());
 				}
 			}
 		}
