@@ -1,10 +1,7 @@
 package com.aston.compScis.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aston.compScis.model.DoubleNode;
@@ -28,6 +25,8 @@ public class RequestHandler implements Controller {
 
 	// MTR Metro Class
 	private MTRMetro metroData;
+	//String Builder
+	private StringBuilder results;
 
 	/**
 	 * MTR Constructor
@@ -44,22 +43,18 @@ public class RequestHandler implements Controller {
 	 */
 	public String listAllTermini() {
 		// Result Variable to pass to the UI
-		String results = "\n";
-		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
+		results = new StringBuilder();
 		// While the HashMap has next information
-		while (itrData.hasNext()) {
-			// Make a new Entry of HashMaps
-			Entry<Line, List<Station>> data = itrData.next();
+		for(Entry<Line, List<Station>> data : metroData.getMTRLines().entrySet()) {
 			// Append the results to output the Train Line name
-			results += ("Train Line: " + data.getKey().getLineName() + "\n");
+			results.append("Train Line: " + data.getKey().getLineName() + "\n");
 			// Append the results to output the starting terminus of the train line
-			results += ("This train goes from:\t " + data.getValue().get(0).toString() + " --- ");
+			results.append("This train goes from:\t " + data.getValue().get(0).toString() + " --- ");
 			// Append the results to output the ending terminus of the train line
-			results += (data.getValue().get(data.getValue().size() - 1).toString() + "\n\n");
+			results.append(data.getValue().get(data.getValue().size() - 1).toString() + "\n\n");
 		}
-		// Pass to the UI
-		return results;
+		// Present to the user the results
+		return results.toString();
 	}
 
 	/**
@@ -71,41 +66,27 @@ public class RequestHandler implements Controller {
 	 */
 	public String listStationsInLine(String line) {
 		// Result Variable to pass to the UI
-		String results = "";
-		// Iterate over the HashMap information
-		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
+		results = new StringBuilder();
 		// while the HashMap has next information
-		while (itrData.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> data = itrData.next();
+		for(Entry<Line, List<Station>> data : metroData.getMTRLines().entrySet()) {			
 			// If the HashMap Key is the requested Line
 			if (data.getKey().getLineName().equalsIgnoreCase(line)) {
 				// Present the Train Line Name
-				results += ("\nTrain Line: " + data.getKey().getLineName() + "\n");
-				results += ("This train goes from:\t ");
+				results.append("This line, " + data.getKey().getLineName() + ", goes through the following stations:\n");
 				// Loop Over the ArrayList in the HashMap
 				for (int i = 0; i < data.getValue().size(); i++) {
-					// If the current index is the size
-					if (data.getValue().get(i).toString() == data.getValue().get(data.getValue().size() - 1)
-							.toString()) {
-						// Present the LAST line station
-						results += data.getValue().get(i).toString();
-					} else {
-						// Present the Line station
-						results += data.getValue().get(i).toString() + " --- ";
-					}
+					// Present the Line station
+						results.append("\t-" + data.getValue().get(i).toString() + "\n");
 				}
-				// New Line
-				results += "\n\n";
 			}
 		}
-		// If the Lines isn't known
-		if (results == "") {
+		// If the Line isn't known
+		if (results.toString().equals("")) {
 			// Output station isn't known
-			results += "Sorry, this is not a known MTR Line.";
+			results.append("Sorry, this is not a known MTR Line.");
 		}
-		// Pass result to the UI
-		return results;
+		// Present to the user the results
+		return results.toString();
 	}
 
 	/**
@@ -117,30 +98,24 @@ public class RequestHandler implements Controller {
 	 */
 	public String listAllDirectlyConnectedLines(String line) {
 		// Result Variable to pass to the UI
-		String results = "";
-		// To get the intended line
-		Iterator<Map.Entry<Line, List<Station>>> it = metroData.getMTRLines().entrySet().iterator();
-		// To get the matching Stations
-		Iterator<Map.Entry<Line, List<Station>>> it2 = metroData.getMTRLines().entrySet().iterator();
+		results = new StringBuilder();
 		// Create the intended Line for User
 		Line searchedLine = new Line(null);
 
 		/*
 		 * Search for the line
 		 */
-		while (it2.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it2.next();
+		for(Entry<Line, List<Station>> data : metroData.getMTRLines().entrySet()) {		
 			// If the searched line is the line in the
-			if (pair.getKey().getLineName().equalsIgnoreCase(line)) {
+			if (data.getKey().getLineName().equalsIgnoreCase(line)) {
 				// Add the Line Name
-				searchedLine.setLineName(pair.getKey().getLineName());
+				searchedLine.setLineName(data.getKey().getLineName());
 				// Append the result
-				results += "The " + pair.getKey().getLineName() + " connects with the following lines: \n\t";
+				results.append("The " + data.getKey().getLineName() + " connects with the following lines: \n\t");
 				// Loop through the HashMap Station Values
-				for (int i = 0; i < pair.getValue().size(); i++) {
+				for (int i = 0; i < data.getValue().size(); i++) {
 					// Add the Double Node of stations
-					searchedLine.addNextStation(pair.getValue().get(i));
+					searchedLine.addNextStation(data.getValue().get(i));
 				}
 			}
 		}
@@ -151,28 +126,26 @@ public class RequestHandler implements Controller {
 		// True/False if the line has been written
 		boolean hasLine;
 		// Loop while second local file
-		while (it.hasNext()) {
-			// Make a new HashMap stating the iteration
-			Entry<Line, List<Station>> pair = it.next();
+		for(Entry<Line, List<Station>> data : metroData.getMTRLines().entrySet()) {			
 			// set to false
 			hasLine = false;
 			// Loop over Iteration HashMap
-			for (int j = 0; j < pair.getValue().size(); j++) {
+			for (int j = 0; j < data.getValue().size(); j++) {
 				// Loop over Line Object
 				for (int i = 0; i < searchedLine.getStationList().size(); i++) {
 					// If a station from the local HashMap (pair) contains a station from the Line
 					// Object (searchedLine)
 					if (searchedLine.getStationList().get(i).getElement().toString()
-							.equals(pair.getValue().get(j).toString())) {
+							.equals(data.getValue().get(j).toString())) {
 						// While no iteration of the line is known
 						while (!hasLine) {
 							// If the line are exactly the same
-							if (searchedLine.getLineName().equals(pair.getKey().getLineName())) {
-								// DO NOT CHANGE
+							if (searchedLine.getLineName().equals(data.getKey().getLineName())) {
+								// DO NOT CHANGE - Removes the repeating line
 								break;
 							} else {
 								// Input the Information of the line
-								results += "- " + pair.getKey().getLineName().toString() + "\n\t";
+								results.append("- " + data.getKey().getLineName().toString() + "\n\t");
 								// Line that has been inserted is known
 								hasLine = true;
 							}
@@ -184,13 +157,13 @@ public class RequestHandler implements Controller {
 			hasLine = false;
 		}
 
-		// If the Lines aren't known
-		if (results == "") {
+		// If the Lines/Stations aren't known
+		if (results.toString().equals("")) {
 			// Output station isn't known
-			results += "Sorry, this station is not known or has no lines.";
+			results.append("Sorry, this station is not known or has no lines.");
 		}
-		// Present to the user
-		return results;
+		// Present to the user the results
+		return results.toString();
 
 	}
 
@@ -204,7 +177,7 @@ public class RequestHandler implements Controller {
 	 * @return The path between the Starting station and the Ending station
 	 */
 	public String showPathBetween(String stationA, String stationB) {
-		String results = "";
+		results = new StringBuilder();
 		// Create Nodes
 		DoubleNode<Station> startStation = null;
 		DoubleNode<Station> endStation = null;
@@ -212,57 +185,66 @@ public class RequestHandler implements Controller {
 		Station firstStation = null;
 		Station lastStation = null;
 
-		Iterator<Map.Entry<Line, List<Station>>> itrData = metroData.getMTRLines().entrySet().iterator();
-
 		// Condition to stop iterating over
 		boolean firstGot = false;
 		boolean lastGot = false;
 		// While data has more information
-		while (itrData.hasNext()) {
-			// Create Entry from iterator
-			Entry<Line, List<Station>> pair = itrData.next();
+		for(Entry<Line, List<Station>> data : metroData.getMTRLines().entrySet()) {	
 			// Loop over the data
-			for (int i = 0; i < pair.getValue().size(); i++) {
+			for (int i = 0; i < data.getValue().size(); i++) {
 				// If Starting Station does match the user's intended station and hasn't been
 				// captured.
-				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
+				if (data.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
 					// Create the Station based on the data
-					firstStation = new Station(pair.getValue().get(i).toString());
-					startStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
+					firstStation = new Station(data.getValue().get(i).toString());
+					startStation = new DoubleNode<Station>(new Station(data.getValue().get(i).toString()));
 
 					// Make it true
 					firstGot = true;
-					System.out.println("this is " + firstStation + "\n" + startStation.getElement());
 				}
 				// If Ending Station does match the user's intended station and hasn't been
 				// captured.
-				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
+				if (data.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
 					// Create the Station based on the data
-					lastStation = new Station(pair.getValue().get(i).toString());
-					endStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
+					lastStation = new Station(data.getValue().get(i).toString());
+					endStation = new DoubleNode<Station>(new Station(data.getValue().get(i).toString()));
 					// Make it true
 					lastGot = true;
-					System.out.println("this is " + lastStation + "\n" + endStation.getElement());
 				}
 			}
 		}
 
-		// Create the LinkedStack
-		LinkedStack<Station> routePath = new LinkedStack<Station>();
-		// First Station to be placed inside the Stack
-		routePath.push(firstStation);
-		/*
-		 * DPS to get between the first Station and the Last Station
-		 */
-		// Last Station to be placed inside the Stack
-		routePath.push(lastStation);
-
-		List<Station> reversedStack = new ArrayList<Station>();
-
-		results += "To get to " + firstStation.toString() + " to " + lastStation.toString()
-				+ ",\n the route to take is:\n";
-
-		return results;
+		try {
+			//If the starting and ending stations are the same
+			if(firstStation.toString().equals(lastStation.toString())) {
+				// Append to the user of the same station 
+				results.append("You are currently at your entry/destination station.");
+			} else {
+				// Create the LinkedStack
+				LinkedStack<Station> routePath = new LinkedStack<Station>();
+				// First Station to be placed inside the Stack
+				routePath.push(firstStation);
+				/*
+				 * DPS to get between the first Station and the Last Station
+				 */
+				
+				// Last Station to be placed inside the Stack
+				routePath.push(lastStation);
+		
+				List<Station> reversedStack = new ArrayList<Station>();
+				// Append the information to the user
+				results.append("To get to " + firstStation.toString() + " to " + lastStation.toString()+ ",\n the route to take is:\n");
+			}
+		// Catch any NullPointerException to bypass non-existing or incorrect stations
+		} catch(NullPointerException npe) {
+			// Reset the length to Nothing
+			results.setLength(0);
+			// Append that it isn't found
+			results.append("The following stations inputted are not known stations.\nPlease check if you have placed the correct stations.");
+		}
+		
+		// Present to the user the results
+		return results.toString();
 	}
 
 }
