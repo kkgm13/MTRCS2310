@@ -263,5 +263,64 @@ public class RequestHandler implements Controller {
 		
 		return results;
 	}
+	/*	
+	 * 
+		// believe this is what we might need.
+		*//**
+		 * Converts the path created by the DFS
+		 * {@link Metro#searchAdjacentLine(Stack, Set, Line, Station)} into a
+		 * {@link List} of {@link Station}s.
+		 * 
+		 * @param linePath
+		 *            The {@link Stack} of {@link Line}s that are on the path from the
+		 *            start {@link Station} to the end {@link Station}.
+		 * @param start
+		 *            {@link Station}
+		 * @param end
+		 *            {@link Station}
+		 * @return {@link List} of {@link Station}s representing the path.
+		 *//*
+		private List<Station> buildPath(Stack<Line> linePath, Station start, Station end) {
 
+			// Holds the full path from the start station to the end station.
+			final LinkedList<Station> fullPath = new LinkedList<>();
+
+			Station previousStationNode = start;
+			Station nextStationNode = null;
+			Line previousLine = null;
+
+			// Iterate through each line of the line path from.
+			for (Line line : linePath) {
+
+				// If there is a previous line.
+				if (previousLine != null) {
+
+					// Set the next node as the first intersecting node between the current line and
+					// the previous line.
+					nextStationNode = line.getIntersectingStationsOf(previousLine.getName()).iterator().next();
+
+					// Get the path along the previous line from the previous node to the current
+					// node.
+					final LinkedList<Station> path = getPathOnLine(previousLine, previousStationNode, nextStationNode);
+
+					// Remove the station that will start the next leg of the full path along the
+					// current line.
+					previousStationNode = path.removeLast();
+
+					// Add the path to the full path
+					fullPath.addAll(path);
+				}
+
+				// Set the current line as the previous line.
+				previousLine = line;
+
+			}
+
+			// Add the last leg of the path from the last node to the end station
+			fullPath.addAll(getPathOnLine(previousLine, previousStationNode, end));
+
+			return fullPath;
+	}
+	*/
+	
 }
