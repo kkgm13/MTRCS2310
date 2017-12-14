@@ -5,8 +5,7 @@ public interface StackADT<T> {
 	/**
 	 * Adds one element to the top of the stack.
 	 * 
-	 * @param the
-	 *            element to be added to the stack
+	 * @param the element to be added to the stack
 	 */
 	public void push(T element);
 

@@ -2,7 +2,8 @@ package com.aston.compScis.model;
 
 /**
  * <h1>Station Class</h1>
- * <p>This class shows any information related to the MTR Stations.
+ * <p>
+ * This class shows any information related to the MTR Stations.
  * 
  * @author Team CompSci's
  * @version 1.0
@@ -10,17 +11,24 @@ package com.aston.compScis.model;
  */
 public class Station {
 
-	//Station Name
+	// Station Name
 	private String stationName;
-	
-	public Station() {
-		stationName = null;
-	}	
-	
+
+	/**
+	 * Constructs a station with a particular station
+	 * 
+	 * @param stationName
+	 */
 	public Station(String stationName) {
 		this.stationName = stationName;
 	}
 	
+
+	/**
+	 * toString representation of station
+	 * 
+	 * @Return stationName
+	 */
 	public String toString() {
 		return stationName;
 	}
