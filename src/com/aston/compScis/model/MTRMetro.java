@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * <h1>MTRMetro</h1>
- * <p>This class is the main handler between the 
+ * <p>This class is the main handler between the RequestHandler and the MTR Metro Data
  * 
  * @author Team CompSci's
  * @version 1.0

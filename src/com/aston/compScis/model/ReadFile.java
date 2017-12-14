@@ -27,9 +27,12 @@ public class ReadFile {
 	private Line line;
 	// Station Class
 	private Station station;
-	//
+	// List of Stations
 	private List<Station> stationList;
 
+	/**
+	 * ReadFile Constructor
+	 */
 	public ReadFile() {
 		station = new Station(null);
 		// Create a new HashMap
