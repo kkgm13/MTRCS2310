@@ -121,7 +121,7 @@ public class RequestHandler implements Controller {
 		}
 
 		/*
-		 * Compare the Line's station against
+		 * Compare the Line's station against the MTR Metro HashMap Data
 		 */
 		// True/False if the line has been written
 		boolean hasLine;
