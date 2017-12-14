@@ -184,7 +184,7 @@ public class RequestHandler implements Controller {
 			hasLine = false;
 		}
 
-		// If the Lines isn't known
+		// If the Lines aren't known
 		if (results == "") {
 			// Output station isn't known
 			results += "Sorry, this station is not known or has no lines.";
@@ -219,28 +219,30 @@ public class RequestHandler implements Controller {
 		boolean lastGot = false;
 		// While data has more information
 		while (itrData.hasNext()) {
-			//Create Entry from iterator
+			// Create Entry from iterator
 			Entry<Line, List<Station>> pair = itrData.next();
-			//Loop over the data
+			// Loop over the data
 			for (int i = 0; i < pair.getValue().size(); i++) {
-				//If Starting Station does match the user's intended station and hasn't been captured.
+				// If Starting Station does match the user's intended station and hasn't been
+				// captured.
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationA) && !firstGot) {
-					//Create the Station based on the data
+					// Create the Station based on the data
 					firstStation = new Station(pair.getValue().get(i).toString());
 					startStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
-					
-					//Make it true
+
+					// Make it true
 					firstGot = true;
-					System.out.println("this is " +firstStation+"\n"+startStation.getElement());
+					System.out.println("this is " + firstStation + "\n" + startStation.getElement());
 				}
-				//If Ending Station does match the user's intended station and hasn't been captured.
+				// If Ending Station does match the user's intended station and hasn't been
+				// captured.
 				if (pair.getValue().get(i).toString().equalsIgnoreCase(stationB) && !lastGot) {
-					//Create the Station based on the data
+					// Create the Station based on the data
 					lastStation = new Station(pair.getValue().get(i).toString());
 					endStation = new DoubleNode<Station>(new Station(pair.getValue().get(i).toString()));
-					//Make it true
+					// Make it true
 					lastGot = true;
-					System.out.println("this is " +lastStation+"\n"+endStation.getElement());
+					System.out.println("this is " + lastStation + "\n" + endStation.getElement());
 				}
 			}
 		}
@@ -250,77 +252,17 @@ public class RequestHandler implements Controller {
 		// First Station to be placed inside the Stack
 		routePath.push(firstStation);
 		/*
-		 * Stuff to get between the first Station and the Last Station
+		 * DPS to get between the first Station and the Last Station
 		 */
-		// Last Staion to be placed inside the Stack
+		// Last Station to be placed inside the Stack
 		routePath.push(lastStation);
-		
-		
+
 		List<Station> reversedStack = new ArrayList<Station>();
 
-		
-		results += "To get to " + firstStation.toString() + " to " + lastStation.toString()+ ",\n the route to take is:\n";
-		
+		results += "To get to " + firstStation.toString() + " to " + lastStation.toString()
+				+ ",\n the route to take is:\n";
+
 		return results;
 	}
-	/*	
-	 * 
-		// believe this is what we might need.
-		*//**
-		 * Converts the path created by the DFS
-		 * {@link Metro#searchAdjacentLine(Stack, Set, Line, Station)} into a
-		 * {@link List} of {@link Station}s.
-		 * 
-		 * @param linePath
-		 *            The {@link Stack} of {@link Line}s that are on the path from the
-		 *            start {@link Station} to the end {@link Station}.
-		 * @param start
-		 *            {@link Station}
-		 * @param end
-		 *            {@link Station}
-		 * @return {@link List} of {@link Station}s representing the path.
-		 *//*
-		private List<Station> buildPath(Stack<Line> linePath, Station start, Station end) {
 
-			// Holds the full path from the start station to the end station.
-			final LinkedList<Station> fullPath = new LinkedList<>();
-
-			Station previousStationNode = start;
-			Station nextStationNode = null;
-			Line previousLine = null;
-
-			// Iterate through each line of the line path from.
-			for (Line line : linePath) {
-
-				// If there is a previous line.
-				if (previousLine != null) {
-
-					// Set the next node as the first intersecting node between the current line and
-					// the previous line.
-					nextStationNode = line.getIntersectingStationsOf(previousLine.getName()).iterator().next();
-
-					// Get the path along the previous line from the previous node to the current
-					// node.
-					final LinkedList<Station> path = getPathOnLine(previousLine, previousStationNode, nextStationNode);
-
-					// Remove the station that will start the next leg of the full path along the
-					// current line.
-					previousStationNode = path.removeLast();
-
-					// Add the path to the full path
-					fullPath.addAll(path);
-				}
-
-				// Set the current line as the previous line.
-				previousLine = line;
-
-			}
-
-			// Add the last leg of the path from the last node to the end station
-			fullPath.addAll(getPathOnLine(previousLine, previousStationNode, end));
-
-			return fullPath;
-	}
-	*/
-	
 }
