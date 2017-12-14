@@ -1,0 +1,59 @@
+1) Output of the first query which is to list all termini in some MTR line
+----------------------------------------------------------------------------
+Train Line: Airport Express
+This train goes from:	 AsiaWorld-Expo --- Hong Kong
+
+Train Line: Ma On Shan Line
+This train goes from:	 Tai Wai --- Wu Kai Sha
+
+Train Line: South Island Line
+This train goes from:	 South Horizons --- Admiralty
+
+Train Line: Tsuen Wan Line
+This train goes from:	 Tsuen Wan --- Central
+
+Train Line: Tseung Kwan O Line
+This train goes from:	 North Point --- Po Lam
+
+Train Line: Island Line
+This train goes from:	 Kennedy Town --- Chai Wan
+
+Train Line: East Rail Line
+This train goes from:	 Lo Wu --- Hung Hom
+
+Train Line: Walkable
+This train goes from:	 Hong Kong --- Central
+
+Train Line: Tung Chung Line
+This train goes from:	 Tung Chung --- Hong Kong
+
+Train Line: Kwun Tong Line
+This train goes from:	 Whampoa --- Tiu Keng Leng
+
+Train Line: Disneyland Resort Line
+This train goes from:	 Sunny Bay --- Disneyland Resort
+
+Train Line: West Rail Line
+This train goes from:	 Tuen Mun --- Hung Hom
+
+2) Output of the second query to list all stations within a specific MTR line
+----------------------------------------------------------------------------
+	eg: Airport Express
+Airport Express goes through the following stations:
+ 	-AsiaWorld-Expo
+	-Airport
+	-Tsing Yi
+	-Kowloon
+	-Hong Kong
+	
+3) Output the directly connected lines for a given MTR line
+----------------------------------------------------------------------------
+	eg: Kwun Tong Line
+The Kwun Tong Line connects with the following lines: 
+	- Tsuen Wan Line
+	- Tseung Kwan O Line
+	- East Rail Line
+	
+4) Output the path between two specified stations
+----------------------------------------------------------------------------
+	eg: Airport to HKU

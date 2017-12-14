@@ -1,7 +1,6 @@
 package com.aston.compScis.mvc;
 
 import com.aston.compScis.controller.RequestHandler;
-import com.aston.compScis.model.MTRMetro;
 import com.aston.compScis.view.TUI;
 
 /**
